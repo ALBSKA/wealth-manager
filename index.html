@@ -324,7 +324,9 @@ input[type=range]{accent-color:var(--cy);height:4px;cursor:pointer;width:100%;ma
     <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 14 14"><path d="M7 2L2 4.5v4c0 3 2.2 5 5 5.5 2.8-.5 5-2.5 5-5.5v-4L7 2z"/><polyline points="5,7 6.5,8.5 9,5.5"/></svg>
     Calcolatore Pensione
   </button>
+  <button id="btnRefresh" onclick="refreshFundData()" style="margin-left:auto;font-size:11px;padding:5px 12px;border-radius:8px;background:rgba(0,240,255,.12);border:1px solid rgba(0,240,255,.35);color:var(--cy);cursor:pointer;font-weight:700;display:flex;align-items:center;gap:5px;">🔄 Aggiorna dati</button>
 </div>
+<div style="text-align:right;font-size:10px;color:var(--txs);padding:2px 16px 0;"><span id="lastUpdate"></span></div>
 
 <!-- TAB 1: CONSULENTE -->
 <div id="tab-wiz" class="tab-panel act">
@@ -666,6 +668,32 @@ function suggestPrev(risk,horizon,work){
   return 'pre';
 }
 
+/* ═══ FUND DATA — fonte: FOCUS Nuovi Orizzonti aprile 2026 ═══ */
+/* ═══ FUND DATA — caricato da dati_fondi.json (aggiornabile) ═══ */
+let _dataLoaded=false;
+async function loadFundData(){
+  try{
+    const r=await fetch('dati_fondi.json?v='+Date.now());
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const d=await r.json();
+    if(d.fund_db) Object.assign(FUND_DB,d.fund_db);
+    if(d.fondi) Object.assign(FONDI,d.fondi);
+    _dataLoaded=true;
+    const el=document.getElementById('lastUpdate');
+    if(el&&d._meta) el.textContent='Dati al '+d._meta.last_updated;
+    console.log('✅ dati_fondi.json caricato:',Object.keys(d.fund_db||{}).length,'fondi');
+  }catch(e){
+    console.warn('⚠️ dati_fondi.json non disponibile, uso dati integrati:',e.message);
+  }
+}
+async function refreshFundData(){
+  const btn=document.getElementById('btnRefresh');
+  if(btn){btn.textContent='⏳ Aggiornando...';btn.disabled=true;}
+  await loadFundData();
+  initFondiTab();
+  if(btn){btn.textContent='🔄 Aggiorna dati';btn.disabled=false;}
+  alert('✅ Dati fondi aggiornati!');
+}
 /* ═══ FUND DATA — fonte: FOCUS Nuovi Orizzonti aprile 2026 ═══ */
 const FUND_DB={
   /* ─── INVESTIMENTO PROGRAMMATO ─── */
@@ -1812,7 +1840,7 @@ function calcProjection(){
 }
 
 /* INIT */
-renderStep();
+loadFundData().then(()=>renderStep());
 </script>
 </body>
 </html>
