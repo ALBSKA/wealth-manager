@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wealth Manager — Allianz Acireale</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+:root{
+--bg:#0D0F1A;--bgc:#111320;--bgch:#171A2C;--bgi:#0A0C16;
+--bd:#1E2240;--bda:#2D3260;
+--tx:#E8EBF8;--txs:#6B729A;--txm:#3A3F5C;
+/* Neon palette */
+--cy:#00F0FF;--cyd:rgba(0,240,255,.10);--cyg:0 0 20px rgba(0,240,255,.35);--cys:rgba(0,240,255,.6);
+--gn:#39FF6A;--gnd:rgba(57,255,106,.10);--gng:0 0 20px rgba(57,255,106,.3);--gns:rgba(57,255,106,.6);
+--am:#FFD700;--amd:rgba(255,215,0,.10);--amg:0 0 20px rgba(255,215,0,.3);--ams:rgba(255,215,0,.6);
+--co:#FF4D6D;--cod:rgba(255,77,109,.10);--cog:0 0 20px rgba(255,77,109,.3);
+--pu:#BF5FFF;--pud:rgba(191,95,255,.10);--pug:0 0 20px rgba(191,95,255,.3);
+--pk:#FF2DF7;--pkd:rgba(255,45,247,.10);--pks:rgba(255,45,247,.5);
+--al:#003781;--al2:#0050CC;
+--r8:8px;--r12:12px;--r16:16px;--r20:20px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.55;min-height:100vh;background-image:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(0,80,204,.18),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(0,240,255,.06),transparent);}
+
+/* ── HEADER ── */
+.hdr{background:linear-gradient(135deg,#000D2E 0%,#001A50 50%,#002680 100%);border-bottom:1px solid rgba(0,240,255,.12);position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 40%,rgba(0,240,255,.04));pointer-events:none;}
+.hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cy),transparent);opacity:.4;}
+.hdr-logo{display:flex;align-items:center;gap:12px;padding:14px 20px;border-right:1px solid rgba(255,255,255,.08);}
+.hdr-divider{width:1px;background:rgba(255,255,255,.08);align-self:stretch;}
+.hdr-logo-mark{width:40px;height:40px;background:linear-gradient(135deg,#fff,#e8f0ff);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.hdr-logo-mark span{font-size:17px;font-weight:900;color:#003781;letter-spacing:-1.5px;}
+.hdr-name{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+.hdr-sub{font-size:10px;color:rgba(255,255,255,.45);margin-top:1px;letter-spacing:.04em;}
+.hdr-title{flex:1;display:flex;align-items:center;font-size:14px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:-.2px;}
+.hdr-badge{display:flex;align-items:center;margin-left:auto;background:linear-gradient(135deg,rgba(0,240,255,.12),rgba(0,240,255,.06));border:1px solid rgba(0,240,255,.35);color:var(--cy);padding:6px 14px;border-radius:24px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;gap:7px;box-shadow:0 0 16px rgba(0,240,255,.1);}
+.hdr-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cy);box-shadow:var(--cyg);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);}}
+
+/* ── TABS ── */
+.tabnav{display:flex;border-bottom:1px solid var(--bd);background:rgba(17,19,32,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:0 20px;gap:2px;position:sticky;top:0;z-index:20;}
+.tnb{padding:13px 20px;font-size:12px;font-weight:700;color:var(--txs);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;display:flex;align-items:center;gap:7px;background:none;border-top:none;border-left:none;border-right:none;letter-spacing:.02em;}
+.tnb:hover{color:var(--tx);}
+.tnb.act{color:var(--cy);border-bottom-color:var(--cy);text-shadow:0 0 12px rgba(0,240,255,.5);}
+.tab-panel{display:none;}
+.tab-panel.act{display:block;}
+.wrap{max-width:720px;margin:0 auto;padding:24px 16px 60px;}
+
+/* ── STEP BAR ── */
+.sbar{display:flex;align-items:center;gap:6px;margin-bottom:24px;padding:14px 18px;background:rgba(17,19,32,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:var(--r16);border:1px solid var(--bd);position:sticky;top:51px;z-index:10;box-shadow:0 8px 32px rgba(0,0,0,.3);}
+.sd{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;background:var(--bgi);color:var(--txm);border:1.5px solid var(--bd);transition:all .25s;cursor:default;}
+.sd.on{background:rgba(0,240,255,.12);color:var(--cy);border-color:var(--cy);box-shadow:var(--cyg);}
+.sd.ok{background:rgba(57,255,106,.1);color:var(--gn);border-color:var(--gn);cursor:pointer;}
+.sd.ok:hover{box-shadow:var(--gng);}
+.sl{flex:1;height:1px;background:var(--bd);}
+.sl.done{background:linear-gradient(90deg,var(--gn),rgba(57,255,106,.3));opacity:.7;}
+.sbar-label{font-size:10px;color:var(--cy);font-weight:800;margin-left:10px;letter-spacing:.06em;text-shadow:0 0 10px rgba(0,240,255,.4);}
+
+/* ── CARD ── */
+.card{background:linear-gradient(145deg,rgba(23,26,44,.95),rgba(17,19,32,.98));border:1px solid var(--bd);border-radius:var(--r20);padding:24px;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--al2),var(--cy),var(--pk));opacity:.7;}
+.card::after{content:'';position:absolute;top:2px;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.3),transparent);}
+.stitle{font-size:20px;font-weight:800;color:var(--tx);letter-spacing:-.5px;margin-bottom:5px;}
+.ssub{font-size:12px;color:var(--txs);margin-bottom:22px;line-height:1.5;}
+
+/* ── CHOICE GRID ── */
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:9px;margin:12px 0;}
+.cc{padding:16px 12px 14px;border:1.5px solid var(--bd);border-radius:var(--r16);cursor:pointer;text-align:center;background:rgba(10,12,22,.7);transition:all .2s;user-select:none;position:relative;overflow:hidden;}
+.cc::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(0,240,255,.06),transparent 70%);opacity:0;transition:opacity .2s;}
+.cc:hover{background:rgba(23,26,44,.9);border-color:var(--bda);}
+.cc:hover::before{opacity:1;}
+.cc.sel{border-color:var(--cy);background:rgba(0,240,255,.07);box-shadow:0 0 0 1px var(--cys), var(--cyg);}
+.cc.sel::before{opacity:1;}
+.cc .ci{display:flex;justify-content:center;margin-bottom:9px;color:var(--txs);transition:all .2s;}
+.cc.sel .ci{color:var(--cy);filter:drop-shadow(0 0 6px rgba(0,240,255,.5));}
+.cc .cl{font-size:11px;font-weight:800;color:var(--tx);letter-spacing:-.1px;}
+.cc .cs{font-size:10px;color:var(--txm);margin-top:3px;line-height:1.3;}
+.cc.sel .cl{color:var(--cy);}
+
+/* ── FORM ── */
+.frow{margin:16px 0;}
+.frow label{display:block;font-size:10px;font-weight:800;color:var(--txs);margin-bottom:7px;letter-spacing:.08em;text-transform:uppercase;}
+.frow input,.frow select{padding:10px 14px;border:1.5px solid var(--bd);border-radius:var(--r12);font-size:13px;background:rgba(10,12,22,.8);color:var(--tx);outline:none;width:100%;max-width:280px;transition:all .2s;font-family:inherit;}
+.frow input:focus,.frow select:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,240,255,.08),var(--cyg);}
+.frow select option{background:var(--bgc);color:var(--tx);}
+input[type=range]{accent-color:var(--cy);height:4px;cursor:pointer;width:100%;max-width:220px;}
+
+/* ── RISK CARDS ── */
+.rc{padding:14px 16px;border:1.5px solid var(--bd);border-radius:var(--r12);cursor:pointer;margin-bottom:9px;background:rgba(10,12,22,.7);display:flex;align-items:center;gap:14px;transition:all .2s;position:relative;overflow:hidden;}
+.rc:hover{background:rgba(23,26,44,.9);border-color:var(--bda);}
+.rc.sel-gn{border-color:var(--gn);background:rgba(57,255,106,.07);box-shadow:0 0 0 1px var(--gns),var(--gng);}
+.rc.sel-cy{border-color:var(--cy);background:rgba(0,240,255,.07);box-shadow:0 0 0 1px var(--cys),var(--cyg);}
+.rc.sel-am{border-color:var(--am);background:rgba(255,215,0,.07);box-shadow:0 0 0 1px var(--ams),var(--amg);}
+.rc.sel-co{border-color:var(--co);background:rgba(255,77,109,.07);box-shadow:0 0 0 1px rgba(255,77,109,.5),var(--cog);}
+.rc-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;transition:box-shadow .2s;border:2px solid rgba(255,255,255,.2);}
+.rc .rn{font-size:13px;font-weight:800;color:var(--tx);letter-spacing:-.1px;}
+.rc .rd{font-size:11px;color:var(--txs);margin-top:2px;}
+
+/* ── NAV BUTTONS ── */
+.navb{display:flex;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid var(--bd);}
+.navb button{flex:1;padding:11px 18px;border-radius:var(--r12);font-size:12px;font-weight:800;cursor:pointer;border:1.5px solid var(--bd);background:rgba(10,12,22,.7);color:var(--txs);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;letter-spacing:.02em;font-family:inherit;}
+.navb button:hover{background:var(--bgch);color:var(--tx);}
+.btn-p{background:linear-gradient(135deg,#0050CC,#0070FF)!important;color:#fff!important;border-color:transparent!important;box-shadow:0 4px 20px rgba(0,80,204,.5),0 0 0 1px rgba(0,200,255,.2)!important;}
+.btn-p:hover{background:linear-gradient(135deg,#0060E0,#0088FF)!important;box-shadow:0 6px 28px rgba(0,80,204,.6),0 0 16px rgba(0,200,255,.2)!important;transform:translateY(-1px);}
+.btn-ghost{background:transparent!important;color:var(--txm)!important;border-color:var(--bd)!important;}
+.btn-sm{padding:8px 16px!important;font-size:11px!important;flex:0 0 auto!important;}
+
+/* ── SECTION HEADERS ── */
+.rsh{font-size:10px;font-weight:900;color:var(--txm);letter-spacing:.12em;text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:10px;}
+.rsh-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rsh::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bd),transparent);}
+
+/* ── PRODUCT CARDS ── */
+.pcard{background:linear-gradient(145deg,rgba(10,12,22,.9),rgba(17,19,32,.95));border:1px solid var(--bd);border-radius:var(--r16);padding:16px;margin-bottom:10px;position:relative;overflow:hidden;transition:border-color .2s;}
+.pcard.feat{border-color:rgba(57,255,106,.35);box-shadow:0 0 24px rgba(57,255,106,.08),inset 0 0 40px rgba(57,255,106,.02);}
+.pcard.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--al2),var(--gn));opacity:.8;border-radius:var(--r16) var(--r16) 0 0;}
+.pname{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;letter-spacing:-.3px;}
+.pdesc{font-size:11px;color:var(--txs);margin-bottom:10px;line-height:1.5;}
+
+/* ── TAGS / PILLS ── */
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:9px;font-weight:900;margin-right:5px;margin-bottom:8px;letter-spacing:.07em;text-transform:uppercase;}
+.tg{background:rgba(57,255,106,.1);color:var(--gn);border:1px solid rgba(57,255,106,.3);}
+.tb{background:rgba(0,240,255,.1);color:var(--cy);border:1px solid rgba(0,240,255,.3);}
+.tw{background:rgba(255,215,0,.1);color:var(--am);border:1px solid rgba(255,215,0,.3);}
+.tr{background:rgba(255,77,109,.1);color:var(--co);border:1px solid rgba(255,77,109,.3);}
+.tp{background:rgba(191,95,255,.1);color:var(--pu);border:1px solid rgba(191,95,255,.3);}
+
+/* ── FUND ITEM ── */
+.fitem{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--r12);background:rgba(0,240,255,.03);border:1px solid rgba(0,240,255,.08);margin-bottom:7px;transition:background .2s;}
+.fitem:hover{background:rgba(0,240,255,.06);}
+.fpct{font-size:24px;font-weight:900;min-width:52px;color:var(--cy);letter-spacing:-1.5px;text-shadow:0 0 12px rgba(0,240,255,.4);}
+.fn{font-size:12px;font-weight:800;color:var(--tx);}
+.fm{font-size:10px;color:var(--txs);margin-top:2px;line-height:1.4;}
+.mb{display:inline-flex;align-items:center;padding:1px 7px;border-radius:4px;font-size:9px;font-weight:800;margin-left:4px;}
+.mbg{background:rgba(57,255,106,.1);color:var(--gn);border:1px solid rgba(57,255,106,.2);}
+.mbn{background:rgba(255,255,255,.05);color:var(--txs);}
+.mbw{background:rgba(255,215,0,.1);color:var(--am);border:1px solid rgba(255,215,0,.2);}
+
+/* ── TAX BOX ── */
+.taxbox{background:linear-gradient(145deg,rgba(57,255,106,.05),rgba(57,255,106,.03));border:1px solid rgba(57,255,106,.2);border-radius:var(--r16);padding:16px;margin:12px 0;position:relative;overflow:hidden;}
+.taxbox::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(57,255,106,.1),transparent);pointer-events:none;}
+.txr{display:flex;justify-content:space-between;font-size:11px;color:rgba(57,255,106,.75);padding:4px 0;}
+.txr.main{font-size:14px;font-weight:900;color:var(--gn);border-top:1px solid rgba(57,255,106,.2);margin-top:8px;padding-top:10px;text-shadow:0 0 10px rgba(57,255,106,.3);}
+.txr-note{font-size:10px;color:rgba(57,255,106,.55);margin-top:6px;line-height:1.5;}
+
+/* ── DUAL BOX ── */
+.dualbox{background:linear-gradient(145deg,rgba(255,215,0,.06),rgba(255,215,0,.03));border:1px solid rgba(255,215,0,.2);border-radius:var(--r16);padding:16px;margin:12px 0;position:relative;overflow:hidden;}
+.dualbox::before{content:'';position:absolute;bottom:0;left:0;width:100px;height:100px;background:radial-gradient(circle,rgba(255,215,0,.08),transparent);pointer-events:none;}
+.dh{font-size:12px;font-weight:900;color:var(--am);margin-bottom:12px;display:flex;align-items:center;gap:8px;text-shadow:0 0 8px rgba(255,215,0,.3);}
+.dstep{font-size:11px;color:rgba(255,215,0,.8);padding:5px 0;display:flex;gap:10px;line-height:1.5;}
+.dstep-num{width:18px;height:18px;border-radius:50%;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.3);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:var(--am);flex-shrink:0;margin-top:1px;}
+
+/* ── INFO STRIPS ── */
+.istrip{border-radius:var(--r12);padding:14px 16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;font-size:11px;line-height:1.6;position:relative;overflow:hidden;}
+.istrip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 50%,rgba(255,255,255,.02),transparent);pointer-events:none;}
+
+/* ── REC HEADER ── */
+.rec-header{background:linear-gradient(135deg,#000D2E,#001E5A,#0040AA);border-radius:var(--r20);padding:20px 22px;margin-bottom:18px;border:1px solid rgba(0,240,255,.15);position:relative;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);}
+.rec-header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(0,240,255,.08),transparent);pointer-events:none;}
+.rec-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.3),transparent);}
+.rec-header-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:9px;letter-spacing:-.3px;}
+.rec-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.rec-meta-item{background:rgba(255,255,255,.06);border-radius:var(--r12);padding:10px 12px;border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(4px);}
+.rec-meta-label{font-size:9px;color:rgba(255,255,255,.4);font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;}
+.rec-meta-val{font-size:12px;font-weight:800;color:#fff;}
+
+/* ── NOTEBOX ── */
+.notebox{background:rgba(255,255,255,.02);border:1px solid var(--bd);border-radius:var(--r12);padding:14px 16px;margin-top:16px;font-size:10px;color:var(--txs);line-height:1.8;}
+.notebox a{color:var(--cy);text-decoration:none;}
+.notebox a:hover{text-shadow:0 0 8px rgba(0,240,255,.4);}
+
+/* ── FONDI TAB SECTIONS ── */
+.sect{background:linear-gradient(145deg,rgba(17,19,32,.95),rgba(11,13,24,.98));border:1px solid var(--bd);border-radius:var(--r20);padding:22px;margin-bottom:18px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3);}
+.sect::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--al2),var(--cy),var(--pk));opacity:.6;}
+.sect-title{font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;letter-spacing:-.2px;}
+.sect-sub{font-size:11px;color:var(--txs);margin-bottom:18px;}
+.chart-wrap{position:relative;height:280px;width:100%;}
+
+/* ── FUND CHECKBOXES ── */
+.fund-checks{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.fck{display:flex;align-items:center;gap:7px;padding:6px 13px;border-radius:24px;border:1.5px solid var(--bd);cursor:pointer;font-size:11px;font-weight:700;color:var(--txs);background:rgba(10,12,22,.7);transition:all .2s;user-select:none;}
+.fck:hover{border-color:var(--bda);color:var(--tx);}
+.fck.on{color:#fff;box-shadow:0 0 8px rgba(0,0,0,.3);}
+.fck input{display:none;}
+
+/* ── METRICS TABLE ── */
+.mtbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px;}
+.mtbl th{text-align:left;padding:9px 12px;color:var(--txs);font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--bd);}
+.mtbl td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--tx);vertical-align:middle;}
+.mtbl tr:hover td{background:rgba(0,240,255,.03);}
+.pill{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:800;}
+
+/* ── COMPARISON FORM ── */
+.comp-form{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.comp-form .frow{margin:0;}
+.comp-form input{max-width:100%!important;}
+.yr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0;}
+.yr-grid .frow{margin:0;}
+.yr-grid input{max-width:100%!important;font-size:12px;}
+
+/* ── KPI ROW ── */
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0;}
+.kpi{background:linear-gradient(145deg,rgba(10,12,22,.9),rgba(17,19,32,.95));border:1px solid var(--bd);border-radius:var(--r16);padding:14px 12px;text-align:center;position:relative;overflow:hidden;transition:border-color .2s;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.3),transparent);}
+.kpi-val{font-size:24px;font-weight:900;letter-spacing:-1.5px;margin-bottom:3px;}
+.kpi-lbl{font-size:10px;color:var(--txs);font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
+.kpi-sub{font-size:10px;color:var(--txm);margin-top:3px;}
+
+/* ── PROJECTION TABLE ── */
+.proj-tbl-wrap{overflow-x:auto;max-height:320px;overflow-y:auto;border-radius:var(--r12);border:1px solid var(--bd);}
+.proj-tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.proj-tbl th{position:sticky;top:0;background:rgba(17,19,32,.95);backdrop-filter:blur(8px);padding:9px 12px;font-size:10px;font-weight:800;color:var(--txs);letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--bd);white-space:nowrap;}
+.proj-tbl td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.03);color:var(--tx);white-space:nowrap;}
+.proj-tbl tr:hover td{background:rgba(0,240,255,.03);}
+.proj-tbl .hl td{background:rgba(0,240,255,.05);}
+
+/* ── SAVINGS BAR ── */
+.sav-bar-wrap{margin:14px 0;}
+.sav-row{display:flex;align-items:center;gap:12px;margin-bottom:7px;}
+.sav-label{width:140px;font-size:10px;color:var(--txs);text-align:right;flex-shrink:0;font-weight:600;}
+.sav-track{flex:1;background:rgba(10,12,22,.8);border-radius:5px;height:22px;overflow:hidden;border:1px solid var(--bd);}
+.sav-fill{height:100%;border-radius:5px;display:flex;align-items:center;padding-left:10px;font-size:10px;font-weight:800;color:#fff;transition:width .5s;}
+.sav-amt{width:80px;font-size:11px;font-weight:800;color:var(--gn);text-align:right;flex-shrink:0;text-shadow:0 0 8px rgba(57,255,106,.3);}
+
+/* ── PREV CARDS ── */
+.prev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0;}
+.prev-card{background:linear-gradient(145deg,rgba(10,12,22,.95),rgba(17,19,32,.98));border:1.5px solid var(--bd);border-radius:var(--r16);padding:16px;position:relative;cursor:pointer;transition:all .2s;overflow:hidden;}
+.prev-card:hover{border-color:var(--bda);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.prev-card.act-card{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.prev-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.prev-card.ins::before{background:linear-gradient(90deg,#003781,var(--cy));box-shadow:0 0 8px rgba(0,240,255,.3);}
+.prev-card.pre::before{background:linear-gradient(90deg,#003781,var(--gn));box-shadow:0 0 8px rgba(57,255,106,.3);}
+.prev-card.ori::before{background:linear-gradient(90deg,#003781,var(--am));box-shadow:0 0 8px rgba(255,215,0,.3);}
+.prev-card.ins.act-card{border-color:rgba(0,240,255,.4);box-shadow:0 0 24px rgba(0,240,255,.1);}
+.prev-card.pre.act-card{border-color:rgba(57,255,106,.4);box-shadow:0 0 24px rgba(57,255,106,.1);}
+.prev-card.ori.act-card{border-color:rgba(255,215,0,.4);box-shadow:0 0 24px rgba(255,215,0,.1);}
+.prev-type{font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;margin-bottom:7px;}
+.prev-name{font-size:13px;font-weight:900;color:var(--tx);margin-bottom:5px;letter-spacing:-.2px;}
+.prev-subtitle{font-size:10px;color:var(--txs);margin-bottom:10px;}
+.prev-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.prev-chip{font-size:9px;font-weight:800;padding:2px 8px;border-radius:10px;border:1px solid;}
+.prev-detail{display:none;border-top:1px solid var(--bd);margin-top:10px;padding-top:10px;}
+.prev-card.act-card .prev-detail{display:block;}
+.prev-row{display:flex;justify-content:space-between;font-size:10px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.03);}
+.prev-row:last-child{border:none;}
+.prev-row span:first-child{color:var(--txs);}
+.prev-row span:last-child{color:var(--tx);font-weight:700;text-align:right;max-width:60%;}
+.comparto-item{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:var(--r8);background:rgba(10,12,22,.7);border:1px solid var(--bd);margin-bottom:5px;font-size:10px;transition:background .2s;}
+.comparto-item:hover{background:rgba(0,240,255,.04);}
+.comparto-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.comparto-name{font-weight:800;color:var(--tx);min-width:90px;}
+.comparto-hz{color:var(--txs);flex:1;}
+.isc-note{font-size:10px;color:var(--txm);margin-top:8px;padding:8px 12px;background:rgba(0,240,255,.04);border-radius:var(--r8);border:1px solid rgba(0,240,255,.1);}
+
+/* ── CATALOG SELECT ── */
+#catalogSelect{background:rgba(10,12,22,.9);border:1.5px solid var(--bd);border-radius:var(--r12);color:var(--tx);font-size:13px;padding:10px 14px;width:100%;outline:none;transition:all .2s;font-family:inherit;}
+#catalogSelect:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,240,255,.08);}
+
+/* ── PRINT ── */
+@media print{
+  body{background:#fff;color:#000;background-image:none;}
+  .hdr{background:#003781!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .navb,.tabnav,.hdr-badge{display:none!important;}
+  .sbar{position:static!important;background:#f0f0f0!important;backdrop-filter:none!important;}
+  .card,.pcard,.fitem,.taxbox,.dualbox,.sect,.prev-card{border-color:#ccc!important;background:#f9f9f9!important;box-shadow:none!important;}
+  .card::before,.sect::before{display:none!important;}
+}
+
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;gap:20px;width:100%;}
+.hdr-img-allianz{height:64px;width:auto;display:block;flex-shrink:0;border-radius:4px;}
+.hdr-img-af{height:64px;width:auto;display:block;flex-shrink:0;}
+.hdr-center-block{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.hdr-title-main{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px;text-align:center;text-shadow:0 0 24px rgba(0,240,255,.4);}
+.hdr-badge{display:inline-flex;align-items:center;background:linear-gradient(135deg,rgba(0,240,255,.15),rgba(0,240,255,.06));border:1px solid rgba(0,240,255,.4);color:var(--cy);padding:5px 14px;border-radius:24px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;gap:7px;box-shadow:0 0 16px rgba(0,240,255,.12);}
+.hdr-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--cy);box-shadow:var(--cyg);animation:pulse 2s infinite;}
+.hdr-img-allianz{height:72px;width:auto;display:block;flex-shrink:0;}
+.hdr-img-af{height:72px;width:auto;display:block;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3));}
+.hdr-center-block{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.hdr-title-main{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.5px;text-align:center;text-shadow:0 0 24px rgba(0,240,255,.3);}
+
+/* ── VS Comparator ── */
+.vs-selectors{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-bottom:4px;}
+.vs-col{display:flex;flex-direction:column;gap:6px;}
+.vs-col-label{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;}
+.vs-select{padding:10px 14px;border:1.5px solid var(--bd);border-radius:var(--r12);font-size:12px;background:rgba(10,12,22,.8);color:var(--tx);outline:none;width:100%;transition:all .2s;font-family:inherit;}
+.vs-select:focus{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,240,255,.08);}
+.vs-badge{width:48px;height:40px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--txs);letter-spacing:.05em;border:1.5px solid var(--bd);border-radius:10px;background:rgba(10,12,22,.5);flex-shrink:0;margin-bottom:2px;}
+.vs-kpi-header{display:grid;grid-template-columns:1fr 110px 1fr;gap:8px;padding:10px 12px 6px;border-bottom:1px solid var(--bd);}
+.vs-kpi-grid{border:1px solid var(--bd);border-radius:var(--r12);overflow:hidden;margin-top:0;}
+.vs-kpi-row{display:grid;grid-template-columns:1fr 110px 1fr;gap:8px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);align-items:center;}
+.vs-kpi-row:last-child{border-bottom:none;}
+.vs-kpi-row:hover{background:rgba(0,240,255,.02);}
+.vs-kpi-val{font-size:14px;font-weight:800;letter-spacing:-.3px;}
+.vs-kpi-row .vs-kpi-val:first-child{text-align:left;}
+.vs-kpi-row .vs-kpi-val:last-child{text-align:right;}
+.vs-kpi-label{font-size:10px;color:var(--txs);font-weight:700;text-align:center;letter-spacing:.03em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-inner">
+    <img src="data:image/jpeg;base64,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" alt="Allianz Agenzia di Acireale" class="hdr-img-allianz"/>
+    <div class="hdr-center-block">
+      <div class="hdr-title-main">Wealth Manager</div>
+      <div class="hdr-badge"><div class="hdr-badge-dot"></div>v3 · IRPEF 2026</div>
+    </div>
+    <img src="data:image/png;base64,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" alt="Assicurazioni &amp; Finanza" class="hdr-img-af"/>
+  </div>
+</div>
+
+<div class="tabnav">
+  <button class="tnb act" onclick="switchTab('wiz',this)">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 14 14"><circle cx="7" cy="5" r="2.5"/><path d="M2 13c0-2.8 2.2-5 5-5s5 2.2 5 5"/></svg>
+    Consulente
+  </button>
+  <button class="tnb" onclick="switchTab('fondi',this)">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 14 14"><polyline points="2,11 5,7 7,9 10,4 12,6"/><line x1="2" y1="13" x2="12" y2="13"/></svg>
+    Analisi Fondi
+  </button>
+  <button class="tnb" onclick="switchTab('pensione',this)">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 14 14"><path d="M7 2L2 4.5v4c0 3 2.2 5 5 5.5 2.8-.5 5-2.5 5-5.5v-4L7 2z"/><polyline points="5,7 6.5,8.5 9,5.5"/></svg>
+    Calcolatore Pensione
+  </button>
+</div>
+
+<!-- TAB 1: CONSULENTE -->
+<div id="tab-wiz" class="tab-panel act">
+  <div class="wrap">
+    <div class="sbar" id="sbar"></div>
+    <div class="card" id="stepContent"></div>
+  </div>
+</div>
+
+<!-- TAB 2: ANALISI FONDI -->
+<div id="tab-fondi" class="tab-panel">
+  <div class="wrap">
+    <div class="sect">
+      <div class="sect-title">Rendimenti storici annui — Nuovi Orizzonti</div>
+      <div class="sect-sub">Seleziona i fondi da confrontare · dati FOCUS Allianz 2020–2025 · risk-free 2,5%</div>
+      <div class="fund-checks" id="fundChecks"></div>
+      <div class="chart-wrap"><canvas id="returnsChart"></canvas></div>
+    </div>
+    <div class="sect">
+      <div class="sect-title">Metriche di rischio/rendimento</div>
+      <div class="sect-sub">Sharpe · Sortino · Max Drawdown · rendimento cumulato</div>
+      <table class="mtbl" id="metricsTable"></table>
+    </div>
+      <div class="sect-sub">Come leggere Sharpe, Sortino, Alpha e Beta · range di riferimento internazionale</div>
+      <div id="legendGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:10px">
+
+        <!-- SHARPE -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--cy);margin-bottom:2px">📐 Sharpe Ratio</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Rendimento eccedente il risk-free ÷ volatilità totale (rf = 2,5%). Più alto = meglio.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#F87171;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">&lt; 0</b> — Negativo · sottoperformance vs risk-free</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#FB923C;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FB923C">0 – 0,25</b> — Accettabile · minimo premio per il rischio</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#FBBF24;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">0,25 – 0,5</b> — Discreto · buon equilibrio rischio/rendimento</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#4ADE80;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">0,5 – 1,0</b> — Buono · solido premio per il rischio</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#22D3EE;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">&gt; 1,0</b> — Eccellente · raramente raggiunto su 5+ anni</span></div>
+          </div>
+        </div>
+
+        <!-- SORTINO -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--gn);margin-bottom:2px">📉 Sortino Ratio</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Come lo Sharpe ma conta solo la volatilità <b>negativa</b> (downside risk). Premia i fondi che proteggono dalle perdite. Stesso range dello Sharpe — Sortino ≥ Sharpe è positivo.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#F87171;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">&lt; 0</b> — Perdite frequenti e significative</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#FBBF24;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">0 – 0,5</b> — Gestione del downside accettabile</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#4ADE80;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">0,5 – 1,0</b> — Buona protezione dal ribasso</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#22D3EE;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">&gt; 1,0</b> — Eccellente gestione del rischio di perdita</span></div>
+          </div>
+        </div>
+
+        <!-- ALPHA -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--am);margin-bottom:2px">α Alpha</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Rendimento <b>extra</b> rispetto al benchmark di riferimento (es. MSCI World, indice obbligaz.). Misura il valore aggiunto dalla gestione attiva.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#F87171;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">α &lt; 0</b> — Distrugge valore rispetto al benchmark</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#FBBF24;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">α = 0</b> — In linea con il mercato (benchmark)</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#4ADE80;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">α &gt; 0</b> — Genera rendimento extra (sovraperformance)</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#22D3EE;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">α &gt; +2%</b> — Gestione attiva di eccellenza</span></div>
+          </div>
+          <div style="margin-top:8px;padding:5px 8px;background:rgba(251,191,36,.06);border-radius:6px;font-size:9.5px;color:rgba(251,191,36,.7)">⚠ Richiede benchmark specifico per categoria · consultare KIID/Factsheet del fondo</div>
+        </div>
+
+        <!-- BETA -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--pk);margin-bottom:2px">β Beta</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Sensibilità del fondo ai movimenti del mercato di riferimento. Beta=1 → si muove come il mercato. Più alto = più amplifica i movimenti (sia al rialzo che al ribasso).</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#22D3EE;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">β &lt; 0,6</b> — Molto difensivo · bassa correlazione col mercato</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#4ADE80;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">0,6 – 0,9</b> — Difensivo · ammortizzo nelle fasi di ribasso</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#FBBF24;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">0,9 – 1,1</b> — Neutro · replica il mercato</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#FB923C;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FB923C">1,1 – 1,4</b> — Aggressivo · amplifica rialzi e ribassi</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#F87171;flex-shrink:0"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">β &gt; 1,4</b> — Molto aggressivo · alta leva sui movimenti</span></div>
+          </div>
+          <div style="margin-top:8px;padding:5px 8px;background:rgba(251,191,36,.06);border-radius:6px;font-size:9.5px;color:rgba(251,191,36,.7)">⚠ Richiede benchmark specifico per categoria · consultare KIID/Factsheet del fondo</div>
+        </div>
+
+      </div>
+      <!-- Barra visiva Sharpe/Sortino -->
+      <div style="margin-top:14px;padding:12px 16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:10px">
+        <div style="font-size:10px;color:var(--txs);margin-bottom:8px;font-weight:700">SCALA VISIVA — SHARPE / SORTINO</div>
+        <div style="position:relative;height:18px;border-radius:8px;overflow:hidden;background:linear-gradient(90deg,#F87171 0%,#FB923C 20%,#FBBF24 35%,#4ADE80 60%,#22D3EE 100%)"></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:9px;color:var(--txs)">
+          <span>≤ −0,5<br><span style="color:#F87171">Pessimo</span></span>
+          <span style="text-align:center">0<br><span style="color:#FB923C">Accettabile</span></span>
+          <span style="text-align:center">0,25<br><span style="color:#FBBF24">Discreto</span></span>
+          <span style="text-align:center">0,5<br><span style="color:#4ADE80">Buono</span></span>
+          <span style="text-align:right">≥ 1,0<br><span style="color:#22D3EE">Eccellente</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sect">
+      <div class="sect-title">Confronto rapido — Catalogo Nuovi Orizzonti</div>
+      <div class="sect-sub">Seleziona un fondo dal catalogo · compare subito nel grafico e nella tabella metriche</div>
+      <div style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:12px;">
+        <div class="frow" style="margin:0;flex:1;min-width:200px">
+          <label>Fondo Nuovi Orizzonti</label>
+          <select id="catalogSelect" style="max-width:100%;width:100%" onchange="previewCatalogFund()">
+            <option value="">— Scegli un fondo —</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:8px;padding-bottom:0">
+          <button class="btn-p btn-sm" onclick="addFromCatalog()" style="height:37px">+ Aggiungi al confronto</button>
+          <button class="btn-ghost btn-sm" onclick="removeFromCatalog()" style="height:37px">Rimuovi</button>
+        </div>
+      </div>
+      <div id="catalogPreview" style="margin-bottom:4px;"></div>
+    </div>
+
+    <div class="sect" id="vsSect">
+      <div class="sect-title">⚡ Confronto testa a testa</div>
+      <div class="sect-sub">Scegli il fondo proposto dal sistema e quello che vuoi sfidarlo — analisi completa rendimenti, rischio e motivazioni</div>
+
+      <!-- Selettori -->
+      <div class="vs-selectors">
+        <div class="vs-col">
+          <div class="vs-col-label" style="color:var(--cy)">🔵 Fondo A — proposto dal sistema</div>
+          <select id="vsLeft" class="vs-select" onchange="renderVsComparison()">
+            <option value="">— Scegli fondo A —</option>
+          </select>
+        </div>
+        <div class="vs-badge">VS</div>
+        <div class="vs-col">
+          <div class="vs-col-label" style="color:var(--am)">🟡 Fondo B — challenger</div>
+          <select id="vsRight" class="vs-select" onchange="renderVsComparison()">
+            <option value="">— Scegli fondo B —</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grafico rendimenti annui -->
+      <div class="chart-wrap" style="height:240px;margin:16px 0"><canvas id="vsBarChart"></canvas></div>
+
+      <!-- KPI side-by-side -->
+      <div id="vsKpiGrid"></div>
+
+      <!-- Verdetto -->
+      <div id="vsVerdict" style="margin-top:12px"></div>
+
+    <div class="sect" id="legendSect">
+      <div class="sect-title">📊 Guida all&apos;interpretazione — Metriche di rischio</div>
+      <div class="sect-sub">Come leggere Sharpe, Sortino, Alpha e Beta · range di riferimento internazionale</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:10px">
+
+        <!-- SHARPE -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--cy);margin-bottom:2px">📐 Sharpe Ratio</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Rendimento eccedente il risk-free ÷ volatilità totale (rf=2,5%). Più alto = meglio.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#F87171;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">&lt; 0</b> — Negativo · sottoperformance vs risk-free</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#FB923C;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FB923C">0 – 0,25</b> — Accettabile · minimo premio per il rischio</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#FBBF24;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">0,25 – 0,5</b> — Discreto · buon equilibrio rischio/rendimento</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#4ADE80;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">0,5 – 1,0</b> — Buono · solido premio per il rischio</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#22D3EE;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">&gt; 1,0</b> — Eccellente · raramente raggiunto su 5+ anni</span></div>
+          </div>
+        </div>
+
+        <!-- SORTINO -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--gn);margin-bottom:2px">📉 Sortino Ratio</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Come Sharpe ma conta solo la volatilità <b>negativa</b>. Premia i fondi che proteggono dai ribassi. Sortino &gt; Sharpe = buon controllo del downside.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#F87171;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">&lt; 0</b> — Perdite frequenti e significative</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#FBBF24;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">0 – 0,5</b> — Gestione del downside accettabile</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#4ADE80;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">0,5 – 1,0</b> — Buona protezione dal ribasso</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#22D3EE;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">&gt; 1,0</b> — Eccellente gestione del rischio di perdita</span></div>
+          </div>
+        </div>
+
+        <!-- ALPHA -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--am);margin-bottom:2px">α Alpha</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Rendimento <b>extra</b> rispetto al benchmark (MSCI World, indice obbl.). Misura il valore aggiunto dalla gestione attiva.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#F87171;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">α &lt; 0</b> — Distrugge valore vs benchmark</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#FBBF24;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">α ≈ 0</b> — In linea con il mercato</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#4ADE80;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">α &gt; 0</b> — Genera rendimento extra (sovraperformance)</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#22D3EE;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">α &gt; +2%</b> — Gestione attiva di eccellenza</span></div>
+          </div>
+          <div style="margin-top:8px;padding:5px 8px;background:rgba(251,191,36,.06);border-radius:6px;font-size:9.5px;color:rgba(251,191,36,.7)">⚠ Richiede benchmark specifico — consultare KIID/Factsheet del fondo</div>
+        </div>
+
+        <!-- BETA -->
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px">
+          <div style="font-weight:800;font-size:13px;color:var(--pk);margin-bottom:2px">β Beta</div>
+          <div style="font-size:10px;color:var(--txs);margin-bottom:10px">Sensibilità ai movimenti del mercato. β=1 → si muove come il mercato. Più alto = amplifica rialzi <em>e</em> ribassi.</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#22D3EE;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#22D3EE">β &lt; 0,6</b> — Molto difensivo · bassa correlazione col mercato</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#4ADE80;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#4ADE80">0,6 – 0,9</b> — Difensivo · ammortizza nelle fasi di ribasso</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#FBBF24;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FBBF24">0,9 – 1,1</b> — Neutro · replica il mercato</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#FB923C;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#FB923C">1,1 – 1,4</b> — Aggressivo · amplifica rialzi e ribassi</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span style="min-width:10px;height:10px;border-radius:2px;background:#F87171;display:inline-block"></span><span style="font-size:11px;color:var(--txm)"><b style="color:#F87171">β &gt; 1,4</b> — Molto aggressivo · alta leva sui movimenti</span></div>
+          </div>
+          <div style="margin-top:8px;padding:5px 8px;background:rgba(251,191,36,.06);border-radius:6px;font-size:9.5px;color:rgba(251,191,36,.7)">⚠ Richiede benchmark specifico — consultare KIID/Factsheet del fondo</div>
+        </div>
+
+      </div>
+      <!-- Barra visiva scala Sharpe/Sortino -->
+      <div style="margin-top:14px;padding:12px 16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:10px">
+        <div style="font-size:10px;color:var(--txs);margin-bottom:8px;font-weight:700;letter-spacing:.05em">SCALA VISIVA — SHARPE / SORTINO</div>
+        <div style="position:relative;height:18px;border-radius:8px;overflow:hidden;background:linear-gradient(90deg,#F87171 0%,#FB923C 20%,#FBBF24 40%,#4ADE80 65%,#22D3EE 100%)"></div>
+        <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:9px;color:var(--txs)">
+          <span>≤ −0,5<br><span style="color:#F87171">Pessimo</span></span>
+          <span style="text-align:center">0<br><span style="color:#FB923C">Accettabile</span></span>
+          <span style="text-align:center">0,25<br><span style="color:#FBBF24">Discreto</span></span>
+          <span style="text-align:center">0,5<br><span style="color:#4ADE80">Buono</span></span>
+          <span style="text-align:right">≥ 1,0<br><span style="color:#22D3EE">Eccellente</span></span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 3: CALCOLATORE PENSIONE -->
+<div id="tab-pensione" class="tab-panel">
+  <div class="wrap">
+
+    <div class="sect">
+      <div class="sect-title">Prodotti previdenziali Allianz</div>
+      <div class="sect-sub">Clicca su una scheda per espandere comparti e caratteristiche · TFR · RITA · anticipi</div>
+      <div class="prev-grid" id="prevGrid"></div>
+      <div style="overflow-x:auto;margin-top:8px;"><table class="mtbl" id="prevCompTable"></table></div>
+    </div>
+
+    <div class="sect">
+      <div class="sect-title">Simulatore IRPEF 2026 — Beneficio fiscale fondo pensione</div>
+      <div class="sect-sub">Aliquote 2026: 23% (fino €28.000) · 33% (€28.001–€50.000) · 43% (oltre €50.000) · Massimale deducibile: <b style="color:var(--gn)">€5.300/anno</b></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div class="frow" style="margin:0"><label>Reddito lordo annuo (€)</label>
+          <input type="number" id="pReddito" value="40000" step="1000" min="0" max="300000" style="max-width:100%" oninput="calcPension()">
+        </div>
+        <div class="frow" style="margin:0"><label>Contributo fondo pensione /anno (€)</label>
+          <input type="number" id="pContrib" value="2400" step="100" min="0" max="5300" style="max-width:100%" oninput="calcPension()">
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--txm);margin-bottom:12px;">Chi può dedurre: dipendenti e autonomi in età lavorativa (&lt;67 anni) · Il TFR conferito non conta nel massimale €5.300</div>
+      <div class="kpi-row" id="kpiRow"></div>
+    </div>
+
+    <div class="sect">
+      <div class="sect-title">Risparmio fiscale per fascia di reddito</div>
+      <div class="sect-sub">Contributo al massimale €5.300 — beneficio IRPEF annuo calcolato per fascia</div>
+      <div class="sav-bar-wrap" id="savBars"></div>
+    </div>
+
+    <div class="sect">
+      <div class="sect-title">Proiezione accumulo a lungo termine</div>
+      <div class="sect-sub">Modifica i parametri per simulare lo scenario del cliente · tassazione prestazione 15%→9% dal 16° anno (−0,3%/anno)</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
+        <div class="frow" style="margin:0"><label>Contributo annuo (€)</label><input type="number" id="pjContrib" value="2400" step="100" min="100" max="5300" style="max-width:100%" oninput="calcProjection()"></div>
+        <div class="frow" style="margin:0"><label>Rendimento atteso %</label><input type="number" id="pjRend" value="3.5" step="0.5" min="0.5" max="8" style="max-width:100%" oninput="calcProjection()"></div>
+        <div class="frow" style="margin:0"><label>Anni versamento</label><input type="number" id="pjYears" value="25" step="1" min="5" max="40" style="max-width:100%" oninput="calcProjection()"></div>
+      </div>
+      <div class="proj-tbl-wrap"><table class="proj-tbl" id="projTable"></table></div>
+    </div>
+
+    <div class="sect">
+      <div class="sect-title">Regime fiscale — confronto strumenti</div>
+      <div class="sect-sub">Vantaggi del fondo pensione/PIP rispetto agli strumenti ordinari</div>
+      <table class="mtbl">
+        <thead><tr><th>Fase</th><th>Fondo pensione / PIP</th><th>Strumento ordinario</th><th>Vantaggio</th></tr></thead>
+        <tbody>
+          <tr><td><b>Versamenti</b></td><td style="color:var(--gn)">Deducibili IRPEF fino €5.300</td><td style="color:var(--co)">Non deducibili</td><td><span class="pill" style="background:var(--gnd);color:var(--gn)">Risparmio immediato</span></td></tr>
+          <tr><td><b>Rendimenti</b></td><td style="color:var(--gn)">Tassati al 20%</td><td style="color:var(--co)">Tassati al 26%</td><td><span class="pill" style="background:var(--gnd);color:var(--gn)">−6% tax/anno</span></td></tr>
+          <tr><td><b>Prestazione finale</b></td><td style="color:var(--gn)">15%→9% (−0,3%/anno dal 16°)</td><td style="color:var(--co)">26% capital gain</td><td><span class="pill" style="background:var(--gnd);color:var(--gn)">−17% a 35 anni</span></td></tr>
+          <tr><td><b>Anticipo sanitario</b></td><td style="color:var(--gn)">75% (tass. 15%)</td><td style="color:var(--co)">Non applicabile</td><td><span class="pill" style="background:var(--gnd);color:var(--gn)">Liquidità emergenza</span></td></tr>
+          <tr><td><b>Anticipo prima casa</b></td><td style="color:var(--gn)">75% dopo 8 anni</td><td style="color:var(--co)">Non applicabile</td><td><span class="pill" style="background:var(--gnd);color:var(--gn)">Flessibilità</span></td></tr>
+          <tr><td><b>RITA</b></td><td style="color:var(--gn)">Pensione anticipata graduale</td><td style="color:var(--co)">Non applicabile</td><td><span class="pill" style="background:var(--gnd);color:var(--gn)">Uscita flessibile</span></td></tr>
+          <tr><td><b>Portabilità</b></td><td style="color:var(--gn)">Libera dopo 2 anni</td><td style="color:var(--co)">N/A</td><td><span class="pill" style="background:var(--cyd);color:var(--cy)">Standard</span></td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:10px;color:var(--txm);margin-top:10px;line-height:1.6;">
+        TFR in fondo pensione: non conta nel massimale €5.300 · Confronta ISC su <a href="https://www.covip.it/isc_dinamico/" target="_blank" style="color:var(--cy)">covip.it/isc_dinamico</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ COSTANTI ═══ */
+const MAX_DED=5300;
+const IRPEF_BRACKETS=[{to:28000,rate:.23},{to:50000,rate:.33},{to:Infinity,rate:.43}];
+const ALL_YEARS=[2020,2021,2022,2023,2024,2025];
+
+/* ═══ PRODOTTI PREVIDENZIALI ═══ */
+const PREV=[
+  {id:'ins',cls:'ins',name:'Allianz Insieme',type:'Fondo Pensione Aperto',typeColor:'#22D3EE',
+   subtitle:'Gestione collettiva · banca depositaria indipendente',
+   tfr:true,minC:'Libero (consigliato ≥ €50/mese)',port:'Dopo 2 anni',
+   anticipi:'Medico 75% · Prima casa 75% · Altre cause 30%',
+   adatto:'Dipendenti con TFR · adesioni collettive e individuali · orizzonte lungo',
+   nota:'Costi più contenuti rispetto al PIP · patrimonio separato dalla compagnia',
+   comparti:[
+     {n:'Garantito',c:'#4ADE80',h:'Breve (3–5 anni)',d:'Rendimento minimo garantito · per chi si avvicina alla pensione'},
+     {n:'Obbligazionario',c:'#22D3EE',h:'Medio (5–10 anni)',d:'Gov e corporate · bassa volatilità'},
+     {n:'Bilanciato',c:'#FBBF24',h:'Medio-lungo (10–18 anni)',d:'Mix az/obblig · rendimento equilibrato'},
+     {n:'Azionario',c:'#F87171',h:'Lungo (>18 anni)',d:'Azionario globale · massima crescita potenziale'},
+   ]},
+  {id:'pre',cls:'pre',name:'Allianz Previdenza',type:'Fondo Pensione Aperto',typeColor:'#4ADE80',
+   subtitle:'Ampia gamma comparti · switch flessibile',
+   tfr:true,minC:'Libero (consigliato ≥ €50/mese)',port:'Dopo 2 anni',
+   anticipi:'Medico 75% · Prima casa 75% · Altre cause 30%',
+   adatto:'Dipendenti e autonomi · profili di rischio differenziati · chi vuole ampia scelta di comparti Allianz',
+   nota:'Switch tra comparti consentito · expertise AllianzGI · ISC competitivo su COVIP',
+   comparti:[
+     {n:'Difensivo/Garantito',c:'#4ADE80',h:'Breve (3–5 anni)',d:'Protezione capitale · componente garantita'},
+     {n:'Prudente',c:'#22D3EE',h:'Medio (5–10 anni)',d:'Prevalenza obbligazionaria · volatilità contenuta'},
+     {n:'Bilanciato',c:'#FBBF24',h:'Medio-lungo (10–18 anni)',d:'Bilanciamento dinamico · gestione attiva'},
+     {n:'Dinamico',c:'#F87171',h:'Lungo (>18 anni)',d:'Azionario globale · massimizzazione crescita'},
+   ]},
+  {id:'ori',cls:'ori',name:'Orizzonte Previdenza',type:'PIP — Piano Individuale Pensionistico',typeColor:'#FBBF24',
+   subtitle:'Contratto assicurativo · Allianz S.p.A.',
+   tfr:false,minC:'Versamento libero · premi aggiuntivi in qualsiasi momento',port:'Dopo 2 anni (trasferimento)',
+   anticipi:'Medico 75% · Prima casa 75% (dopo 8 anni) · Altre cause 30%',
+   adatto:'Autonomi · liberi professionisti · chi non ha TFR · chi vuole flessibilità massima · ottimale abbinato a PAC Nuovi Orizzonti',
+   nota:'Contribuzione senza vincoli periodici · componente Ramo I disponibile (gestione separata garantita) · costi PIP superiori ai fondi aperti — verificare ISC su COVIP',
+   comparti:[
+     {n:'Garantito (Ramo I)',c:'#4ADE80',h:'Qualsiasi orizzonte',d:'Gestione separata · rivalutazione annua consolidata · garanzia 0%'},
+     {n:'Prudente',c:'#22D3EE',h:'Medio (5–10 anni)',d:'Obbligazionario difensivo · volatilità contenuta'},
+     {n:'Bilanciato',c:'#FBBF24',h:'Medio-lungo (10–18 anni)',d:'Mix azionario/obbligazionario · rischio moderato'},
+     {n:'Dinamico',c:'#F87171',h:'Lungo (>18 anni)',d:'Prevalenza azionaria · alta crescita potenziale'},
+   ]},
+];
+
+function suggestPrev(risk,horizon,work){
+  // PIP (Orizzonte Previdenza) SOLO in due casi:
+  //  1. A ridosso di pensione: orizzonte breve (<8 anni) E profilo conservativo/moderato
+  //  2. Autonomi / Liberi professionisti / Imprenditori (motivo principalmente fiscale)
+  //     — ma SOLO se anche l'orizzonte è breve, altrimenti anche loro vanno su fondo aperto
+  const isPipFiscal = (work==='autonomo') && horizon < 10;
+  const isPipPension = horizon <= 7 && (risk==='conservativo'||risk==='moderato');
+  if(isPipFiscal || isPipPension) return 'ori';
+  // Fondo aperto: Insieme (lungo orizzonte, profilo dinamico/aggressivo)
+  if(horizon>=15 && (risk==='dinamico'||risk==='aggressivo')) return 'ins';
+  // Fondo aperto: Previdenza (caso generale)
+  return 'pre';
+}
+
+/* ═══ FUND DATA — fonte: FOCUS Nuovi Orizzonti aprile 2026 ═══ */
+const FUND_DB={
+  /* ─── INVESTIMENTO PROGRAMMATO ─── */
+  'PIMCO Obblig. Prudente':{color:'#FDE68A',years:[2020,2021,2022,2023,2024,2025],returns:[1.58,-1.46,-3.36,3.68,4.64,2.36],cat:'Inv. Programmato',note:'Bassa duration · bassa volatilità · rendimento positivo 24 mesi · lancio mar 2019'},
+  /* ─── PROFILI ─── */
+  'Profilo Prudente':{color:'#6EE7B7',years:[2020,2021,2022,2023,2024,2025],returns:[3.20,4.55,-15.21,6.21,3.60,1.35],cat:'Profilo · Bilanciato Difensivo',note:'Az 24% · Obbl 67% · AR 8% · lancio mar 2019 · +3,3% dal lancio'},
+  'Profilo Moderato':{color:'#60A5FA',years:[2020,2021,2022,2023,2024,2025],returns:[5.38,8.68,-17.07,7.40,4.81,3.68],cat:'Profilo · Bilanciato Moderato',note:'Az 44% · Obbl 47% · AR 8% · lancio mar 2019 · +13,6% dal lancio'},
+  'Profilo Dinamico':{color:'#3B82F6',years:[2020,2021,2022,2023,2024,2025],returns:[5.38,12.75,-18.43,8.72,5.51,5.08],cat:'Profilo · Azionario Bilanciato',note:'Az 65% · Obbl 27% · AR 8% · lancio mar 2019 · +22,0% dal lancio'},
+  'Bilanciato Prudente Cl.D':{color:'#A7F3D0',years:[2021,2022,2023,2024,2025],returns:[-0.37,-17.95,8.13,1.19,2.77],cat:'Profilo · Bilanciato Difensivo',note:'Az 20% · Obbl 80% · Classe D · lancio ott 2021'},
+  'Azionario Cl.E (AllianzGI)':{color:'#0047AA',years:[2021,2022,2023,2024,2025],returns:[3.35,-16.05,15.45,13.98,4.52],cat:'Profilo · Azionario',note:'Az 84% · gestione attiva AllianzGI · Classe E · +21,8% dal lancio'},
+  'Bilanciato Cl.E (AllianzGI)':{color:'#1D4ED8',years:[2021,2022,2023,2024,2025],returns:[1.67,-18.98,12.28,11.69,3.42],cat:'Profilo · Bilanciato',note:'Az 50% · Obbl 50% · AllianzGI · Classe E · +8,7% dal lancio'},
+  /* ─── SQUADRA VINCENTE ─── */
+  'Goldman Sachs Az.':{color:'#22D3EE',years:[2020,2021,2022,2023,2024,2025],returns:[-0.28,11.81,-13.82,10.61,12.32,8.63],sharpe:0.23,sortino:0.20,cat:'Azionario · Nuovi Orizzonti',neonato:true,note:'Wrapper Allianz lanciato 2025 (neonato per FOCUS) · storico fondo sottostante GSAM · +38,3% GSAM · YTD 2026: +2,55% · NON appartiene a Squadra Vincente'},
+  'AllianzGI Italia (SV)':{color:'#2563EB',years:[2020,2021,2022,2023,2024,2025],returns:[-2.05,7.77,-16.03,4.60,6.10,7.33],cat:'Squadra Vincente · Bilanciato',note:'Gestore AllianzGI · +33,3% dal lancio · YTD 2026: +0,96%'},
+  'BlackRock (SV)':{color:'#374151',years:[2020,2021,2022,2023,2024,2025],returns:[2.10,4.29,-16.50,6.90,11.30,3.80],sharpe:-0.06,sortino:-0.07,cat:'Squadra Vincente · Bilanciato',note:'★ Miglior SV · Sharpe -0.06 (top SV) · +9,8% cumulato · top 2024 (+11,3%) · YTD 2026: +3,60%'},
+  'Fidelity (SV)':{color:'#B45309',years:[2020,2021,2022,2023,2024,2025],returns:[-5.30,5.00,-14.10,5.90,10.10,-0.40],cat:'Squadra Vincente · Bilanciato',note:'Gestore Fidelity · +3,1% dal lancio · YTD 2026: +2,70%'},
+  'Franklin Templeton (SV)':{color:'#7C3AED',years:[2020,2021,2022,2023,2024,2025],returns:[0.02,6.44,-14.81,6.54,8.40,1.72],cat:'Squadra Vincente · Bilanciato',note:'Gestore Franklin Templeton · +11,0% dal lancio · YTD 2026: +2,74%'},
+  'Morgan Stanley (SV)':{color:'#0891B2',years:[2020,2021,2022,2023,2024,2025],returns:[-1.47,2.39,-17.61,6.78,11.74,0.83],cat:'Squadra Vincente · Bilanciato',note:'Gestore Morgan Stanley · +39,6% dal lancio · YTD 2026: +0,31%'},
+  'Pictet (SV)':{color:'#059669',years:[2020,2021,2022,2023,2024,2025],returns:[-1.19,4.94,-16.17,5.75,7.65,3.69],cat:'Squadra Vincente · Bilanciato',note:'Gestore Pictet · +30,6% dal lancio · YTD 2026: +0,85%'},
+  'PIMCO (SV)':{color:'#DC2626',years:[2020,2021,2022,2023,2024,2025],returns:[4.69,3.74,-16.03,5.48,6.56,6.42],cat:'Squadra Vincente · Bilanciato',note:'Gestore PIMCO · +24,2% dal lancio · YTD 2026: +1,82%'},
+  'JPMorgan (SV)':{color:'#1E3A5F',years:[2020,2021,2022,2023,2024,2025],returns:[1.50,5.20,-15.80,6.40,9.80,2.90],sharpe:-0.08,sortino:-0.09,cat:'Squadra Vincente · Bilanciato',note:'Gestore JPMorgan Asset Management · dati indicativi · SV Nuovi Orizzonti'},
+  /* ─── TEMI DI INVESTIMENTO ─── */
+  'Obblig. Strategico (PIMCO)':{color:'#FBBF24',years:[2020,2021,2022,2023,2024,2025],returns:[0.26,-2.05,-12.57,5.13,2.64,5.87],sharpe:-0.39,sortino:-0.29,cat:'Tema · Obbligazionario Flessibile',note:'100% obbligaz. PIMCO · carry positivo 2025/26 · lancio ott 2019'},
+  'Obbligazionario (AllianzGI)':{color:'#F59E0B',years:[2020,2021,2022,2023,2024,2025],returns:[0.54,-2.74,-11.86,3.82,1.50,0.75],cat:'Tema · Obbligazionario',note:'100% obbligaz. AllianzGI · corporate EUR focus · lancio mar 2019'},
+  'Pet & Animals':{color:'#A78BFA',years:[2020,2021,2022,2023,2024,2025],returns:[26.20,20.46,-24.15,7.46,2.90,-10.83],sharpe:0.06,sortino:0.06,cat:'Tema · Azionario Tematico',note:'Tema animali domestici · alta volatilità · satellite · lancio mar 2019'},
+  'Investimenti Sostenibili':{color:'#4ADE80',years:[2020,2021,2022,2023,2024,2025],returns:[-1.12,6.41,-13.15,7.29,7.06,3.71],cat:'Tema · ESG/SRI',note:'ESG AllianzGI · Az 41% Obbl 33% Flex 26% · lancio mar 2019'},
+  'Best in Class':{color:'#86EFAC',years:[2020,2021,2022,2023,2024,2025],returns:[-1.55,6.96,-14.01,4.58,9.49,4.39],cat:'Tema · Multi-Asset',note:'Multi-gestore best-in-class · Az 54% Obbl 25% Flex 21% · lancio gen 2020'},
+  'Best Equity':{color:'#10B981',years:[2021,2022,2023,2024,2025],returns:[9.78,-18.63,11.69,12.85,6.26],sharpe:0.14,sortino:0.09,cat:'Tema · Azionario',note:'Azionario AllianzGI · 96% Az · +26,9% dal lancio · YTD 2026: +6,07%'},
+  'Automatic 40':{color:'#F97316',years:[2021,2022,2023,2024,2025],returns:[1.18,-12.14,6.96,3.99,2.21],cat:'Tema · Bilanciato Difensivo',note:'Az 34% Obbl 56% Flex 9% · AllianzGI · lancio feb 2021'},
+  'Risk Control':{color:'#CBD5E1',years:[2023,2024,2025],returns:[2.40,2.16,1.12],cat:'Tema · Obbligazionario Breve',note:'100% obbl. breve · bassa volatilità · lancio nov 2022'},
+  'AZ Rend. Italia 35 Inflation':{color:'#22C55E',years:[2022,2023,2024,2025],returns:[-3.20,9.10,3.70,3.10],cat:'Tema · Obbligaz. BTP',note:'BTP ital + az globale · scad. 25/10/2035 · obiettivo inflazione · lancio nov 2022'},
+  'AZ Rend. Italia 35 Smart Eq.':{color:'#16A34A',years:[2022,2023,2024,2025],returns:[-5.50,11.90,6.10,4.30],cat:'Tema · Bilanciato BTP',note:'BTP stripped 2035 (66%) + az globale · scad. 12/04/2035 · lancio nov 2022'},
+};
+let CUSTOM_FUNDS={};
+let selectedFunds=new Set(['Goldman Sachs Az.','Profilo Moderato','BlackRock (SV)']); // default = moderato PAC
+let _lastRecFunds=[]; // fondi PAC dell'ultima raccomandazione generata
+let returnsChart=null;
+
+/* ═══ WIZARD DATA ═══ */
+const FONDI={
+  conservativo:{
+    pac:[
+      {n:'Gestione Separata VitARIV',p:60,sh:'—',so:'—',d:'Garanzia 0% a 10 anni · rivalutazione annua consolidata'},
+      {n:'Profilo Prudente',p:25,sh:'0.06',so:'0.03',d:'Bilanciato difensivo · bassa volatilità · orizzonte 5 anni'},
+      {n:'Obblig. Strategico (PIMCO)',p:15,sh:'-0.39',so:'-0.29',d:'In recupero · carry positivo 2025/26'}
+    ],
+    unico:[
+      {n:'100VitaRiv 2026 Special Edition',t:'Ramo I — Gestione Separata',d:'Rivalutazione garantita · capitale protetto · ideale per successione'},
+      {n:'Nuovi Orizzonti — Bilanciato Prudente',t:'Ramo I + III Multiramo',d:'Nucleo garantito + obbligazionario · profilo difensivo'},
+      {n:'A4L Multifund — Prudente',t:'Unit Linked Multifondo',d:'Per capitali > €25.000 · gestione separata + obbligazionario · switch gratuiti'}
+    ]
+  },
+  moderato:{
+    pac:[
+      {n:'Goldman Sachs Az.',p:35,sh:'0.23',so:'0.20',d:'Miglior Sharpe/Sortino del panel · storico GSAM · core consigliato'},
+      {n:'Profilo Moderato',p:35,sh:'0.11',so:'0.08',d:'Bilanciato flessibile · gestione attiva · orizzonte 7 anni'},
+      {n:'Fidelity (SV)',p:30,sh:'-0.20',so:'-0.13',d:'Multi-asset · ampia diversificazione geografica'}
+    ],
+    unico:[
+      {n:'Nuovi Orizzonti — Goldman / Profilo Moderato',t:'Ramo III Bilanciato',d:'Switch gratuiti · orizzonte 7–10 anni'},
+      {n:'A4L Multifund — Bilanciato',t:'Unit Linked Multifondo',d:'Per capitali > €25.000 · switch illimitati'}
+    ]
+  },
+  dinamico:{
+    pac:[
+      {n:'Goldman Sachs Az.',p:50,sh:'0.23',so:'0.20',d:'Miglior Sharpe/Sortino del panel · storico GSAM · componente azionaria core'},
+      {n:'Best Equity',p:30,sh:'0.14',so:'0.09',d:'Azionario globale · momentum eccellente 2023/24/25'},
+      {n:'Azionario Cl.E (AllianzGI)',p:20,sh:'0.14',so:'0.09',d:'Azionario puro globale · diversificazione per stile'}
+    ],
+    unico:[
+      {n:'Nuovi Orizzonti — Goldman / Best Equity',t:'Ramo III Azionario',d:'Orizzonte minimo 10 anni · massima crescita'},
+      {n:'A4L Multifund — Azionario',t:'Unit Linked',d:'Per capitali > €25.000'}
+    ]
+  },
+  aggressivo:{
+    pac:[
+      {n:'Goldman Sachs Az.',p:40,sh:'0.23',so:'0.20',d:'Core azionario · miglior risk-adjusted del panel · storico GSAM'},
+      {n:'Best Equity',p:30,sh:'0.14',so:'0.09',d:'Top 3 performance cumulate 2021–2025'},
+      {n:'Azionario Cl.E (AllianzGI)',p:20,sh:'0.14',so:'0.09',d:'Azionario puro · esposizione globale'},
+      {n:'Pet & Animals',p:10,sh:'0.06',so:'0.06',d:'Satellite tematico · alta volatilità · clienti consapevoli'}
+    ],
+    unico:[
+      {n:'Nuovi Orizzonti — 100% Azionario',t:'Ramo III Aggressivo',d:'Orizzonte minimo 13 anni · nessuna componente garantita'},
+      {n:'A4L Multifund — 100% Azionario',t:'Unit Linked',d:'Per capitali > €50.000'}
+    ]
+  }
+};
+const RISKS=[
+  {id:'conservativo',name:'Conservativo',desc:'Protezione capitale · bassa tolleranza alle perdite',dot:'var(--gn)',sel:'sel-gn',glow:'var(--gng)'},
+  {id:'moderato',    name:'Moderato',    desc:'Equilibrio crescita e stabilità · volatilità contenuta',dot:'var(--cy)',sel:'sel-cy',glow:'var(--cyg)'},
+  {id:'dinamico',    name:'Dinamico',    desc:'Crescita prioritaria · orizzonte 10+ anni',dot:'var(--am)',sel:'sel-am',glow:'var(--amg)'},
+  {id:'aggressivo',  name:'Aggressivo',  desc:'Massimizzazione rendimento · alta tolleranza',dot:'var(--co)',sel:'sel-co',glow:'var(--cog)'}
+];
+const CLIENTS=[
+  {id:'nonno',          ic:'users',l:'Nonno / Nonna',      s:'Polizza vita · tutela successoria'},
+  {id:'genitore_figlio',ic:'users',l:'Genitore per figlio',s:'PAC · accumulo · eventuale FP per figlio a carico'},
+  {id:'adulto_se',      ic:'user', l:'Adulto per sé',      s:'Risparmio personale'},
+  {id:'giovane',        ic:'grad', l:'Giovane lavoratore', s:'Previdenza complementare'},
+  {id:'adulto_figlio',  ic:'baby', l:'Per figlio < 18',    s:'Accumulo lungo termine'},
+];
+const GOALS=[
+  {id:'previdenza', ic:'bank',  l:'Previdenza',  s:'Pensione integrativa'},
+  {id:'accumulo',   ic:'chart', l:'Accumulo',    s:'Capitale futuro'},
+  {id:'successione',ic:'fork',  l:'Successione', s:'Polizza vita fuori asse ereditario'},
+  {id:'protezione', ic:'shield',l:'Protezione',  s:'Tutela + rendimento'},
+];
+const WORKS=[
+  {id:'dipendente',    ic:'brief',l:'Dipendente',        s:'Deduce IRPEF (anche per figlio a carico) · TFR conferibile'},
+  {id:'autonomo',      ic:'tools',l:'Autonomo / Lib.prof.',s:'Deduce IRPEF · no TFR · versamenti flessibili (PIP se orizzonte breve)'},
+  {id:'pensionato',    ic:'clock',l:'Pensionato',         s:'Non deduce'},
+  {id:'non_lavoratore',ic:'home', l:'Non lavoratore',    s:'Non deduce'},
+];
+const MODES=[
+  {id:'pac',     ic:'repeat',l:'Solo PAC mensile',  s:'Versamenti ricorrenti'},
+  {id:'unico',   ic:'coin',  l:'Solo premio unico', s:'Versamento una tantum'},
+  {id:'entrambi',ic:'bolt',  l:'PAC + premio unico',s:'Soluzione mista'},
+];
+const STEP_LABELS=['Cliente','Lavoro','Obiettivo','Rischio','Importi'];
+
+/* ═══ STATE ═══ */
+const S={step:1,clientType:'',age:40,workStatus:'',goal:'',risk:'',mode:'',monthly:200,lump:10000,horizon:10,reddito:40000};
+
+/* ═══ ICONS ═══ */
+const IC={
+  user:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.5"/><path d="M3 18c0-3.866 3.134-7 7-7s7 3.134 7 7"/></svg>`,
+  users:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><circle cx="7.5" cy="7" r="3"/><path d="M1 18c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="14.5" cy="6" r="2.2"/><path d="M19 18c0-2.8-1.9-5-4.5-5.5"/></svg>`,
+  baby:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><circle cx="10" cy="5" r="3"/><path d="M6 10c0-2.2 1.8-4 4-4s4 1.8 4 4"/><path d="M8 14l-1 4M12 14l1 4M7 17h6"/></svg>`,
+  grad:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><path d="M10 3L2 7l8 4 8-4-8-4z"/><path d="M6 9v5c0 2 1.8 3 4 3s4-1 4-3V9"/><path d="M18 7v5"/></svg>`,
+  brief:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M7 7V5a2 2 0 014 0v2"/><path d="M2 12h16"/></svg>`,
+  tools:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><path d="M14.5 2a3.5 3.5 0 00-3 5.3L3 15.8a1.5 1.5 0 002.2 2.2l8.5-8.5A3.5 3.5 0 1014.5 2z"/></svg>`,
+  clock:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M10 5.5v4.5l3 3"/></svg>`,
+  home:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><path d="M3 9.5L10 3l7 6.5"/><path d="M5 8v9h4v-5h2v5h4V8"/></svg>`,
+  bank:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><path d="M3 9h14M3 15h14M10 3L3 9h14L10 3z"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="10" y1="9" x2="10" y2="15"/><line x1="14" y1="9" x2="14" y2="15"/><path d="M2 15h16v2H2z"/></svg>`,
+  chart:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><polyline points="3,15 7,9 10,12 14,6 17,8"/><line x1="3" y1="18" x2="17" y2="18"/></svg>`,
+  fork:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><circle cx="10" cy="4" r="2"/><circle cx="5" cy="16" r="2"/><circle cx="15" cy="16" r="2"/><path d="M10 6v3M8.5 9L5 14M11.5 9L15 14"/></svg>`,
+  shield:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><path d="M10 2L3 5.5v5.5c0 4 3 7 7 8 4-1 7-4 7-8V5.5L10 2z"/><polyline points="7,10 9,12 13,8"/></svg>`,
+  repeat:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><path d="M4 4h10a3 3 0 013 3v1"/><path d="M16 16H6a3 3 0 01-3-3v-1"/><polyline points="2,12 4,14 6,12"/><polyline points="14,4 16,6 18,4"/></svg>`,
+  coin:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/><path d="M10 7v6M8 8.5h2.5a1.5 1.5 0 010 3H9a1.5 1.5 0 000 3H12"/></svg>`,
+  bolt:`<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 20 20"><polyline points="12,2 6,11 11,11 8,18 14,9 9,9 12,2"/></svg>`,
+  check:`<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 14 14"><polyline points="2,7 5.5,11 12,3"/></svg>`,
+  arrow_r:`<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 14 14"><path d="M2 7h10M8 3l4 4-4 4"/></svg>`,
+  arrow_l:`<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 14 14"><path d="M12 7H2M6 3L2 7l4 4"/></svg>`,
+  print:`<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 15 15"><path d="M4 4V2h7v2"/><rect x="1" y="5" width="13" height="7" rx="1"/><path d="M4 12v2h7v-2"/><circle cx="12" cy="8" r=".7" fill="currentColor"/></svg>`,
+  refresh:`<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 14 14"><path d="M2 7a5 5 0 0110 0M2.5 4L2 7l3 .5"/></svg>`,
+  report:`<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 18 18"><rect x="2" y="2" width="14" height="14" rx="2"/><line x1="6" y1="7" x2="12" y2="7"/><line x1="6" y1="10" x2="12" y2="10"/><line x1="6" y1="13" x2="9" y2="13"/></svg>`,
+};
+
+/* ═══ HELPERS ═══ */
+function fmt(n){return new Intl.NumberFormat('it-IT').format(Math.round(n));}
+function fmtD(n){return new Intl.NumberFormat('it-IT',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);}
+function ic(name){return IC[name]||'';}
+function mbadge(val,lbl){
+  const n=parseFloat(val);
+  const cls=isNaN(n)?'mbn':n>=0.15?'mbg':n>=0?'mbn':'mbw';
+  return `<span class="mb ${cls}">${lbl||'Sh'}:${val}</span>`;
+}
+function calcIRPEF(r){
+  let t=0,p=0;
+  for(const b of IRPEF_BRACKETS){const top=Math.min(r,b.to);if(top>p)t+=(top-p)*b.rate;p=b.to;if(r<=b.to)break;}
+  return t;
+}
+function margRate(r){for(const b of IRPEF_BRACKETS){if(r<=b.to)return b.rate;}return .43;}
+function sharpeOf(ret){const rf=2.5,m=ret.reduce((a,b)=>a+b,0)/ret.length,s=Math.sqrt(ret.reduce((a,b)=>a+(b-m)**2,0)/ret.length);return s?((m-rf)/s):0;}
+function sortinoOf(ret){const rf=2.5,m=ret.reduce((a,b)=>a+b,0)/ret.length,d=ret.filter(r=>r<rf);if(!d.length)return 9;const dd=Math.sqrt(d.reduce((a,b)=>a+b**2,0)/d.length);return dd?((m-rf)/dd):0;}
+
+/* ═══ TAB SWITCH ═══ */
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('act'));
+  document.querySelectorAll('.tnb').forEach(b=>b.classList.remove('act'));
+  const panel=document.getElementById('tab-'+id);
+  if(panel) panel.classList.add('act');
+  // Attiva il pulsante tab corretto (btn può essere null se chiamato dal wizard)
+  if(btn) btn.classList.add('act');
+  else document.querySelectorAll('.tnb').forEach(b=>{
+    if((b.getAttribute('onclick')||'').includes("'"+id+"'")) b.classList.add('act');
+  });
+  if(id==='fondi'){
+    // 1) aggiorna selectedFunds con i fondi del profilo corrente
+    syncFondiWithRec();
+    // 2) aspetta che il browser abbia renderizzato il canvas, poi inizializza
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        initFondiTab();
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+    });
+  }
+  if(id==='pensione') setTimeout(initPensioneTab,60);
+}
+
+/* ── Analisi diretta dei fondi raccomandati ── */
+/* ── Analisi inline (espande direttamente nella scheda wizard) ── */
+function toggleAnalisiInline(){
+  const box=document.getElementById('inlineAnalisi');
+  const btn=document.getElementById('btnAnalizza');
+  if(!box) return;
+  if(box.style.display==='block'){
+    box.style.display='none';
+    if(btn) btn.textContent='📊 Analizza questi fondi ▼';
+    return;
+  }
+  box.style.display='block';
+  if(btn) btn.textContent='📊 Nascondi analisi ▲';
+  renderAnalisiInline(box);
+}
+function renderAnalisiInline(box){
+  const db=allFunds();
+  const funds=_lastRecFunds.filter(n=>!!db[n]);
+  if(!funds.length){box.innerHTML='<div style="color:#F87171;font-size:11px">Nessun fondo disponibile per l\'analisi.</div>';return;}
+  const YEARS=ALL_YEARS;
+  const rf=2.5;
+  function sh(rets){const ex=rets.map(r=>r-rf);const mn=ex.reduce((a,b)=>a+b,0)/ex.length;const sd=Math.sqrt(ex.reduce((a,b)=>a+(b-mn)**2,0)/ex.length);return sd?+(mn/sd).toFixed(2):0;}
+  function so(rets){const ex=rets.map(r=>r-rf);const mn=ex.reduce((a,b)=>a+b,0)/ex.length;const neg=ex.filter(x=>x<0);const ds=neg.length?Math.sqrt(neg.reduce((a,b)=>a+b*b,0)/ex.length):0.001;return +(mn/ds).toFixed(2);}
+  function cum(rets){return +((rets.reduce((a,b)=>a*(1+b/100),1)-1)*100).toFixed(1);}
+  function mn(rets){return +(rets.reduce((a,b)=>a+b,0)/rets.length).toFixed(2);}
+  function shColor(v){return v>=0.5?'#4ADE80':v>=0.25?'#FBBF24':v>=0?'#FB923C':'#F87171';}
+  function shLabel(v){return v>=0.5?'Buono':v>=0.25?'Discreto':v>=0?'Accettabile':'Negativo';}
+  // barre anno per anno (HTML puro, no Chart.js)
+  const maxAbs=Math.max(...funds.flatMap(n=>db[n].returns.map(Math.abs)),1);
+  const COLORS=funds.map(n=>db[n].color);
+  let h='';
+  // Tabella rendimenti annui
+  h+=`<div style="overflow-x:auto;margin-bottom:14px">
+  <table style="width:100%;border-collapse:collapse;font-size:10px">
+    <thead><tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+      <th style="text-align:left;padding:4px 6px;color:var(--txs)">Fondo</th>`;
+  YEARS.forEach(y=>h+=`<th style="text-align:right;padding:4px 6px;color:var(--txs)">${y}</th>`);
+  h+=`<th style="text-align:right;padding:4px 6px;color:var(--cy)">Cum.</th>
+      <th style="text-align:right;padding:4px 6px;color:var(--am)">Media</th>
+    </tr></thead><tbody>`;
+  funds.forEach((name,fi)=>{
+    const f=db[name];
+    h+=`<tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+      <td style="padding:4px 6px;font-weight:700;color:${f.color};white-space:nowrap">${name}</td>`;
+    YEARS.forEach(y=>{
+      const i=f.years.indexOf(y);
+      const v=i>=0?f.returns[i]:null;
+      const col=v===null?'var(--txs)':v>=0?'#4ADE80':'#F87171';
+      const bar=v===null?'—':`<div style="display:inline-flex;align-items:center;gap:3px"><span style="display:inline-block;width:${Math.round(Math.abs(v)/maxAbs*28)}px;height:6px;border-radius:2px;background:${v>=0?'#4ADE80':'#F87171'}"></span><b style="color:${col}">${v>=0?'+':''}${v.toFixed(1)}%</b></div>`;
+      h+=`<td style="text-align:right;padding:4px 6px">${bar}</td>`;
+    });
+    const c=cum(f.returns);
+    const m=mn(f.returns);
+    h+=`<td style="text-align:right;padding:4px 6px;font-weight:800;color:var(--cy)">${c>=0?'+':''}${c}%</td>
+        <td style="text-align:right;padding:4px 6px;color:var(--am)">${m>=0?'+':''}${m}%</td>
+      </tr>`;
+  });
+  h+='</tbody></table></div>';
+  // Metriche Sharpe / Sortino con badge colorati
+  h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:4px">`;
+  funds.forEach(name=>{
+    const f=db[name];
+    const sv=f.sharpe!==undefined?f.sharpe:sh(f.returns);
+    const sov=f.sortino!==undefined?f.sortino:so(f.returns);
+    const cv=cum(f.returns);
+    const mv=mn(f.returns);
+    const sc=shColor(sv);
+    const soc=shColor(sov);
+    const md=Math.min(...f.returns);
+    h+=`<div style="background:${f.color}11;border:1px solid ${f.color}44;border-radius:10px;padding:10px">
+      <div style="font-weight:800;font-size:11px;color:${f.color};margin-bottom:6px">${name}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px">
+        <span style="background:${sc}22;color:${sc};border:1px solid ${sc}55;border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700">Sh ${sv>=0?'+':''}${sv.toFixed(2)} · ${shLabel(sv)}</span>
+        <span style="background:${soc}22;color:${soc};border:1px solid ${soc}55;border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700">So ${sov>=0?'+':''}${sov.toFixed(2)} · ${shLabel(sov)}</span>
+      </div>
+      <div style="font-size:10px;color:var(--txm);line-height:1.7">
+        Cumulato: <b style="color:var(--cy)">${cv>=0?'+':''}${cv}%</b><br>
+        Media ann.: <b style="color:var(--am)">${mv>=0?'+':''}${mv}%</b><br>
+        Anno peggiore: <b style="color:#F87171">${md.toFixed(1)}%</b>
+      </div>
+    </div>`;
+  });
+  h+='</div>';
+  // Nota metodologica
+  h+=`<div style="margin-top:10px;font-size:9px;color:var(--txs);padding:6px 10px;background:rgba(255,255,255,.02);border-radius:6px;border:1px solid rgba(255,255,255,.06)">
+    Dati FOCUS Allianz 2020–2025 · Risk-free 2,5% · Sharpe = excess return / volatilità totale · Sortino = excess return / downside deviation · Rendimenti passati non garantiscono risultati futuri
+  </div>`;
+  box.innerHTML=h;
+}
+/* ── Mantieni analizzaFondiRaccomandati per compatibilità ── */
+function analizzaFondiRaccomandati(names){
+  toggleAnalisiInline();
+}
+
+/* ═══════════════════════════════════════
+   WIZARD
+═══════════════════════════════════════ */
+function choiceHTML(arr,key){
+  return '<div class="cg">'+arr.map(a=>`<div class="cc ${S[key]===a.id?'sel':''}" onclick="pick('${key}','${a.id}',this)">
+    <div class="ci">${ic(a.ic)}</div><div class="cl">${a.l}</div><div class="cs">${a.s||''}</div>
+  </div>`).join('')+'</div>';
+}
+function pick(key,val,el){
+  S[key]=val;
+  el.closest('.cg').querySelectorAll('.cc').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  if(key==='workStatus'||key==='mode') renderStep();
+}
+function pickRisk(id){
+  S.risk=id;
+  document.querySelectorAll('.rc').forEach(c=>RISKS.forEach(r=>c.classList.remove(r.sel)));
+  const el=document.getElementById('rc_'+id);
+  const ri=RISKS.find(r=>r.id===id);
+  if(el&&ri){el.classList.add(ri.sel);el.querySelector('.rc-dot').style.boxShadow=ri.glow;}
+}
+function renderBar(){
+  let h='';
+  for(let i=1;i<=5;i++){
+    if(i>1) h+=`<div class="sl ${i<=S.step?'done':''}"></div>`;
+    const cls=i<S.step?'ok':i===S.step?'on':'';
+    h+=`<div class="sd ${cls}" title="${STEP_LABELS[i-1]}"${i<S.step?` onclick="goStep(${i})"`:''}>
+      ${i<S.step?ic('check'):i}</div>`;
+  }
+  h+=`<span class="sbar-label">${S.step<=5?STEP_LABELS[S.step-1]:'Raccomandazione'}</span>`;
+  document.getElementById('sbar').innerHTML=h;
+}
+function renderStep(){
+  renderBar();
+  const c=document.getElementById('stepContent');
+  let h='';
+  if(S.step===1){
+    h=`<p class="stitle">Chi è il cliente?</p>
+    <p class="ssub">Tipologia e età dell'assicurato</p>
+    ${choiceHTML(CLIENTS,'clientType')}
+    <div class="frow" style="margin-top:16px"><label>Età assicurato</label>
+      <input type="number" id="ageInp" min="0" max="100" value="${S.age}" style="max-width:130px" onchange="S.age=+this.value">
+    </div>`;
+  } else if(S.step===2){
+    h=`<p class="stitle">Situazione professionale</p>
+    <p class="ssub">Determina deducibilità IRPEF e prodotti disponibili</p>
+    ${choiceHTML(WORKS,'workStatus')}`;
+    if(S.workStatus==='dipendente'||S.workStatus==='autonomo'){
+      h+=`<div class="frow" style="margin-top:14px"><label>Reddito lordo annuo stimato (€)</label>
+        <input type="number" id="redInp" min="5000" max="300000" step="1000" value="${S.reddito}" style="max-width:220px" oninput="updateRedLabel(+this.value)">
+        <div id="redLabel" style="margin-top:6px;font-size:11px;color:var(--cy);font-weight:700"></div>
+      </div>`;
+    }
+  } else if(S.step===3){
+    h=`<p class="stitle">Obiettivo primario</p>
+    <p class="ssub">Finalità principale dell'investimento</p>
+    ${choiceHTML(GOALS,'goal')}
+    <div class="frow" style="margin-top:18px"><label>Orizzonte temporale</label>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <input type="range" min="1" max="40" value="${S.horizon}" oninput="S.horizon=+this.value;document.getElementById('hout').textContent=this.value+' anni'">
+        <div style="background:var(--cyd);border:1px solid rgba(34,211,238,.3);border-radius:var(--r8);padding:6px 14px;text-align:center">
+          <span id="hout" style="font-size:16px;font-weight:800;color:var(--cy)">${S.horizon} anni</span>
+        </div>
+      </div>
+    </div>`;
+  } else if(S.step===4){
+    h=`<p class="stitle">Profilo di rischio</p>
+    <p class="ssub">Propensione alle perdite — MiFID II / IDD</p>
+    ${RISKS.map(r=>`<div class="rc ${S.risk===r.id?r.sel:''}" id="rc_${r.id}" onclick="pickRisk('${r.id}')">
+      <div class="rc-dot" style="background:${r.dot};box-shadow:${S.risk===r.id?r.glow:'none'}"></div>
+      <div><div class="rn">${r.name}</div><div class="rd">${r.desc}</div></div>
+    </div>`).join('')}`;
+  } else if(S.step===5){
+    h=`<p class="stitle">Modalità e importi</p>
+    <p class="ssub">Come intende investire il cliente?</p>
+    ${choiceHTML(MODES,'mode')}
+    <div style="margin-top:16px">
+    ${S.mode!=='unico'?`<div class="frow"><label>Rata PAC mensile (€100–€2.000)</label>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input type="number" id="mInp" min="100" max="2000" step="50" value="${S.monthly}" style="max-width:160px" onchange="S.monthly=+this.value">
+        <span style="font-size:12px;color:var(--txs);font-weight:700">€/mese</span>
+      </div></div>`:''}
+    ${S.mode!=='pac'?`<div class="frow"><label>Premio unico (€1.200–€500.000)</label>
+      <div style="display:flex;align-items:center;gap:10px">
+        <input type="number" id="lInp" min="1200" max="500000" step="1000" value="${S.lump}" style="max-width:160px" onchange="S.lump=+this.value">
+        <span style="font-size:12px;color:var(--txs);font-weight:700">€</span>
+      </div></div>`:''}
+    </div>`;
+  } else {
+    h=buildRec();
+  }
+  let nav='';
+  if(S.step<6){
+    nav=`<div class="navb">
+      ${S.step>1?`<button onclick="go(-1)" style="max-width:140px">${ic('arrow_l')} Indietro</button>`:'<div></div>'}
+      <button class="btn-p" onclick="go(1)">${S.step===5?`${ic('report')} Genera raccomandazione`:`Avanti ${ic('arrow_r')}`}</button>
+    </div>`;
+  } else {
+    nav=`<div class="navb">
+      <button onclick="go(-1)" style="max-width:130px">${ic('arrow_l')} Modifica</button>
+      <button onclick="window.print()">${ic('print')} Stampa</button>
+      <button class="btn-ghost" onclick="resetWiz()">${ic('refresh')} Nuovo</button>
+    </div>`;
+  }
+  c.innerHTML=h+nav;
+  if(S.step===2&&(S.workStatus==='dipendente'||S.workStatus==='autonomo')) updateRedLabel(S.reddito);
+}
+function updateRedLabel(v){
+  S.reddito=v;
+  const lbl=document.getElementById('redLabel');
+  if(lbl) lbl.textContent='Aliquota marginale: '+Math.round(margRate(v)*100)+'% · IRPEF stimata: '+fmt(calcIRPEF(v))+' €';
+}
+function go(dir){
+  if(dir===1&&S.step===1){const a=document.getElementById('ageInp');if(a)S.age=+a.value;}
+  if(dir===1&&S.step===2){const r=document.getElementById('redInp');if(r)S.reddito=+r.value;}
+  if(dir===1&&S.step===5){
+    const m=document.getElementById('mInp'),l=document.getElementById('lInp');
+    if(m)S.monthly=+m.value;if(l)S.lump=+l.value;
+  }
+  S.step=Math.max(1,Math.min(6,S.step+dir));
+  renderStep();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goStep(n){S.step=n;renderStep();}
+function resetWiz(){
+  Object.assign(S,{step:1,clientType:'',age:40,workStatus:'',goal:'',risk:'',mode:'',monthly:200,lump:10000,horizon:10,reddito:40000});
+  renderStep();
+}
+
+function buildRec(){
+  syncFondiWithRec(); // Allinea Analisi Fondi con profilo wizard
+  const r=S.risk||'moderato';
+  const fondi=FONDI[r];
+  const rInfo=RISKS.find(x=>x.id===r);
+  const rLabel=rInfo?.name||r;
+  const canDed=(S.workStatus==='dipendente'||S.workStatus==='autonomo')&&S.age<67;
+  const isChild=['adulto_figlio','genitore_figlio'].includes(S.clientType)||(S.clientType==='adulto_se'&&S.age<18);
+  const isNonno=S.clientType==='nonno'||S.goal==='successione';
+  const showPac=S.mode==='pac'||S.mode==='entrambi';
+  const showLump=S.mode==='unico'||S.mode==='entrambi';
+  const bigCap=S.lump>25000;
+  const wLabel=(WORKS.find(w=>w.id===S.workStatus)||{l:'—'}).l;
+  const gLabel=(GOALS.find(g=>g.id===S.goal)||{l:'—'}).l;
+  const mLabel=(MODES.find(m=>m.id===S.mode)||{l:'—'}).l;
+  const today=new Date().toLocaleDateString('it-IT');
+  const reddito=S.reddito||40000;
+  const mr=margRate(reddito);
+  const contrib=Math.min(showPac?S.monthly*12:MAX_DED,MAX_DED);
+  const irpefSenza=calcIRPEF(reddito);
+  const irpefCon=calcIRPEF(reddito-contrib);
+  const saving=irpefSenza-irpefCon;
+  /* prodotto previdenziale */
+  const pId=suggestPrev(r,S.horizon,S.workStatus);
+  const pProd=PREV.find(p=>p.id===pId)||PREV[0];
+  const pCompartoMap={conservativo:0,moderato:1,dinamico:2,aggressivo:3};
+  const pComp=pProd.comparti[pCompartoMap[r]||1];
+
+  let out='<div>';
+  out+=`<div class="rec-header">
+    <div class="rec-header-title">${ic('report')} Scheda di consulenza — ${today}</div>
+    <div class="rec-meta">
+      <div class="rec-meta-item"><div class="rec-meta-label">Età</div><div class="rec-meta-val">${S.age} anni</div></div>
+      <div class="rec-meta-item"><div class="rec-meta-label">Professione</div><div class="rec-meta-val">${wLabel}</div></div>
+      <div class="rec-meta-item"><div class="rec-meta-label">Obiettivo</div><div class="rec-meta-val">${gLabel}</div></div>
+      <div class="rec-meta-item"><div class="rec-meta-label">Orizzonte</div><div class="rec-meta-val" style="color:var(--cy)">${S.horizon} anni</div></div>
+      <div class="rec-meta-item"><div class="rec-meta-label">Profilo</div><div class="rec-meta-val" style="color:${rInfo?.dot||'#fff'}">${rLabel}</div></div>
+      <div class="rec-meta-item"><div class="rec-meta-label">Modalità</div><div class="rec-meta-val">${mLabel}</div></div>
+    </div>
+  </div>`;
+
+  if(showPac){
+    out+=`<div class="rsh"><div class="rsh-icon" style="background:var(--cyd);color:var(--cy)">${ic('repeat')}</div>PAC mensile — Nuovi Orizzonti</div>
+    <div class="pcard feat">
+      <span class="tag tg">Soluzione principale</span><span class="tag tb">Piano di accumulo</span>
+      <div class="pname">Nuovi Orizzonti — PAC ${fmt(S.monthly)} €/mese</div>
+      <div class="pdesc">Tariffa 88M 03 · Allianz S.p.A. · SDD mensile · switch 0,50% · sospensione senza penali</div>`;
+    fondi.pac.forEach(f=>{
+      out+=`<div class="fitem"><div class="fpct">${f.p}%</div>
+        <div style="flex:1"><div class="fn">${f.n} ${mbadge(f.sh,'Sh')}${mbadge(f.so,'So')}</div>
+        <div class="fm">${f.d}</div></div></div>`;
+    });
+    _lastRecFunds=fondi.pac.map(f=>f.n).filter(n=>!!allFunds()[n]);
+    out+=`<div style="margin-top:10px;font-size:10px;color:var(--txm);border-top:1px solid var(--bd);padding-top:8px;display:flex;justify-content:space-between;align-items:center">
+      <span>Versato stimato in ${S.horizon} anni: <span style="color:var(--cy);font-weight:700">${fmt(S.monthly*12*S.horizon)} €</span></span>
+      <button onclick="toggleAnalisiInline()" id="btnAnalizza" style="font-size:10px;padding:4px 10px;border-radius:6px;background:rgba(0,240,255,.1);border:1px solid rgba(0,240,255,.3);color:var(--cy);cursor:pointer;font-weight:700">📊 Analizza questi fondi ▼</button>
+    </div>
+    <div id="inlineAnalisi" style="display:none;margin-top:12px"></div>
+    </div>`;
+  }
+  if(showLump){
+    out+=`<div class="rsh"><div class="rsh-icon" style="background:var(--amd);color:var(--am)">${ic('coin')}</div>Premio unico</div>`;
+    fondi.unico.forEach((p,i)=>{
+      out+=`<div class="pcard ${i===0?'feat':''}">
+        ${i===0?'<span class="tag tg">Principale</span>':'<span class="tag tb">Alternativa</span>'}
+        ${bigCap&&p.n.includes('A4L')?'<span class="tag tw">Grandi capitali</span>':''}
+        <div class="pname">${p.n}</div>
+        <div class="pdesc">${p.t} · ${p.d}</div>
+        <div style="font-size:13px;font-weight:800;color:var(--am)">${fmt(S.lump)} €</div>
+      </div>`;
+    });
+  }
+  if(canDed&&!isChild){
+    out+=`<div class="rsh"><div class="rsh-icon" style="background:var(--gnd);color:var(--gn)">${ic('bank')}</div>Previdenza complementare — IRPEF 2026</div>
+    <div class="pcard">
+      <span class="tag tg">Deducibile IRPEF</span><span class="tag ${pId==='ori'?'tw':'tb'}">${pProd.type}</span>
+      <div class="pname">${pProd.name} — Comparto ${pComp.n}</div>
+      <div class="pdesc">${pProd.nota} · Rendimenti 20% vs 26% · Prestazione 15%→9% dopo 35 anni · Max deducibile: <b style="color:var(--gn)">€5.300</b></div>
+      ${pId==='ori'?`<div style="margin:4px 0 6px;padding:6px 10px;background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.2);border-radius:8px;font-size:10px;color:rgba(255,215,0,.85)">
+        ⚠️ <b>Perché il PIP in questo caso:</b> ${S.horizon<=7?'orizzonte breve — il PIP consente versamenti flessibili senza vincoli periodici e la componente Ramo I garantita è adatta a chi è prossimo alla pensione.':'profilo autonomo/libero professionista — il PIP non richiede versamenti periodici obbligatori, utile per redditi variabili. Per orizzonti lunghi valutare anche i fondi aperti Insieme o Previdenza (ISC generalmente più basso su COVIP).'}
+      </div>`:''}
+      <div class="taxbox">
+        <div class="txr"><span>Reddito lordo stimato</span><span><b>${fmt(reddito)} €</b></span></div>
+        <div class="txr"><span>IRPEF senza fondo pensione</span><span>${fmt(irpefSenza)} €</span></div>
+        <div class="txr"><span>Contributo annuo deducibile</span><span><b>${fmt(contrib)} €</b></span></div>
+        <div class="txr"><span>Aliquota marginale IRPEF 2026</span><span>${Math.round(mr*100)}%</span></div>
+        <div class="txr"><span>IRPEF con fondo pensione</span><span>${fmt(irpefCon)} €</span></div>
+        <div class="txr main"><span>Risparmio fiscale annuo</span><span>${fmt(saving)} €</span></div>
+        <div class="txr-note">Rimborso mensile equivalente: ~${fmt(saving/12)} €/mese · via 730 anno successivo</div>
+        <div style="margin-top:6px;padding:6px 8px;background:rgba(34,211,238,.05);border-radius:6px;font-size:10px;line-height:1.7;color:var(--txs)">
+          <b style="color:var(--cy)">Chi può dedurre:</b>
+          dipendenti e autonomi in età lavorativa (&lt;67 anni) ·
+          <b>anche il genitore che versa per un figlio fiscalmente a carico</b>
+          (la deduzione spetta a <em>chi sostiene l'onere</em>, da indicare nel 730 del dichiarante, non del figlio).
+          Pensionati e non lavoratori <em>non</em> possono dedurre.
+        </div>
+      </div>
+      <div style="margin-top:8px;padding:7px 10px;background:rgba(34,211,238,.05);border:1px solid rgba(34,211,238,.12);border-radius:var(--r8);font-size:10px;color:var(--txs)">
+        <b style="color:var(--cy)">Comparto suggerito:</b> <span style="color:var(--tx);font-weight:700">${pComp.n}</span> — ${pComp.d}
+        &nbsp;·&nbsp;<a href="https://www.covip.it/isc_dinamico/" target="_blank" style="color:var(--cy)">ISC su COVIP →</a>
+      </div>
+    </div>`;
+    /* Avviso fondo aperto preferito se autonomo con orizzonte lungo */
+    if(pId==='ori'&&S.workStatus==='autonomo'&&S.horizon>=10){
+      out+=`<div class="istrip" style="background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.2);margin-top:4px">
+        <div style="color:var(--cy);flex-shrink:0;font-size:14px">ℹ️</div>
+        <div style="color:rgba(0,240,255,.85);font-size:11px">Con un orizzonte di <b>${S.horizon} anni</b> anche un <b>fondo pensione aperto</b> (Allianz Insieme o Allianz Previdenza) è un'ottima alternativa al PIP: ISC spesso più basso, patrimonio separato dalla compagnia, gamma comparti più ampia. Confrontare ISC su <a href="https://www.covip.it/isc_dinamico/" target="_blank" style="color:var(--cy)">COVIP →</a></div>
+      </div>`;
+    }
+    if(showPac&&S.horizon>=10){
+      out+=`<div class="dualbox">
+        <div class="dh">${ic('bolt')} Doppia soluzione consigliata</div>
+        <div class="dstep"><div class="dstep-num">1</div><span>Versa in <b>${pProd.name}</b> fino a <b>${fmt(contrib)} €/anno</b> (${fmt(contrib/12)} €/mese) → deducibili IRPEF</span></div>
+        <div class="dstep"><div class="dstep-num">2</div><span>Recupero fiscale <b>${fmt(saving)} €/anno</b> reinvestito in <b>Nuovi Orizzonti PAC</b> come versamento aggiuntivo annuale</span></div>
+        <div class="dstep"><div class="dstep-num">3</div><span>Previdenza + accumulo parallelo · costo netto reale: <b>${fmt(contrib-saving)} €/anno</b></span></div>
+        <div style="font-size:10px;color:rgba(251,191,36,.55);margin-top:8px">Rimborso arriva con il 730 — pianificare versamento aggiuntivo a giugno/luglio.</div>
+      </div>`;
+    }
+  }
+  if(isChild){
+    out+=`<div class="istrip" style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.2)">
+      <div style="color:var(--cy);flex-shrink:0">${ic('users')}</div>
+      <div style="color:rgba(34,211,238,.85)"><b>Polizza intestata a minore:</b> contraente = genitore/nonno · assicurato = figlio. Impignorabile, insequestrabile, fuori asse ereditario. Non fa parte dell'asse ereditario: la somma va direttamente al beneficiario nominato, senza passare per la successione.</div>
+    </div>`;
+    if(S.clientType==='genitore_figlio'&&canDed){
+      const contrib2=Math.min(MAX_DED,S.monthly?S.monthly*12:MAX_DED);
+      const saving2=calcIRPEF(reddito)-calcIRPEF(reddito-contrib2);
+      out+=`<div class="istrip" style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25);margin-top:8px">
+        <div style="color:var(--gn);flex-shrink:0">${ic('bank')}</div>
+        <div>
+          <div style="color:var(--gn);font-weight:800;font-size:12px;margin-bottom:4px">🎯 Fondo Pensione per figlio fiscalmente a carico — Chi deduce?</div>
+          <div style="color:rgba(74,222,128,.9);font-size:11px;line-height:1.7">
+            Il genitore (dipendente o autonomo) può aprire un fondo pensione intestato al figlio a carico fiscalmente (reddito figlio &lt; €2.840,51 / €4.000 se &lt; 24 anni) e versare i contributi.<br>
+            <b>La deduzione IRPEF spetta al genitore dichiarante</b>, non al figlio — perché è il genitore a sostenere l'onere economico.<br>
+            Limite deducibile: <b style="color:var(--gn)">€5.300/anno</b> complessivi (inclusi eventuali versamenti del figlio stesso).<br>
+            La deduzione va indicata nel <b>730 del genitore</b>, nel quadro E / sezione previdenza complementare.<br>
+            <span style="color:rgba(74,222,128,.6);font-size:10px">Risparmio stimato con reddito ${fmt(reddito)} €: <b style="color:var(--gn)">${fmt(saving2)} €/anno</b> · Rif. art. 8, D.Lgs. 252/2005</span>
+          </div>
+        </div>
+      </div>`;
+    }
+  }
+  if(isNonno){
+    out+=`<div class="istrip" style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2)">
+      <div style="color:var(--am);flex-shrink:0">${ic('fork')}</div>
+      <div>
+        <div style="color:var(--am);font-weight:800;font-size:12px;margin-bottom:4px">⚠️ Successione: di cosa si tratta?</div>
+        <div style="color:rgba(251,191,36,.9);font-size:11px;line-height:1.8">
+          <b>Successione = polizza vita</b> (es. 100VitaRiv, Nuovi Orizzonti), <em>non</em> un fondo pensione.<br>
+          Le polizze vita sono per legge <b>escluse dall'asse ereditario</b>: il capitale va direttamente al beneficiario nominato, senza atti notarili, senza imposta di successione, senza divisione tra eredi.<br>
+          Sono inoltre <b>impignorabili e insequestrabili</b> (art. 1923 c.c.) — proteggono il patrimonio anche in caso di debiti.<br>
+          <span style="font-size:10px;color:rgba(251,191,36,.6)">⚠️ Non confondere con il fondo pensione aperto per il futuro di un figlio/nipote (quello è finalità "accumulo" o "genitore per figlio" → PAC/unit linked intestato al minore).</span>
+        </div>
+      </div>
+    </div>`;
+  }
+  if(bigCap&&showLump){
+    const a4lComp=r==='conservativo'?'Prudente':r==='moderato'?'Bilanciato':r==='dinamico'?'Azionario':'100% Azionario';
+    out+=`<div class="pcard" style="border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.04);margin-top:4px">
+      <span class="tag tg">Grandi capitali &gt; €25.000</span><span class="tag tw">Allianz Active For Life</span>
+      <div class="pname">A4L Multifund — Comparto ${a4lComp}</div>
+      <div class="pdesc">Unit Linked Multifondo · premio unico ${fmt(S.lump)} € · switch gratuiti illimitati · accesso all'intera gamma Nuovi Orizzonti · massima flessibilità di riallocazione</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:10px">
+        <span style="color:var(--gn)">✓ Switch illimitati gratuiti</span>
+        <span style="color:var(--gn)">✓ Gestione attiva multi-comparto</span>
+        <span style="color:var(--gn)">✓ Accesso piattaforma completa</span>
+      </div>
+    </div>`;
+  }
+  if(r==='conservativo'||r==='moderato'){
+    out+=`<div class="pcard" style="border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.04);margin-top:4px">
+      <span class="tag" style="background:rgba(167,139,250,.15);color:rgba(167,139,250,.9)">Profilo avverso al rischio</span><span class="tag tw">Ramo I · Gestione Separata</span>
+      <div class="pname">Gestione Separata VitARIV</div>
+      <div class="pdesc">Rivalutazione annua <b>consolidata e irreversibile</b> · Garanzia restituzione capitale a 10 anni · Rendimento minimo garantito 0% · Patrimonio separato dalla compagnia · Tassazione differita al rimborso</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:10px;color:rgba(167,139,250,.85)">
+        <span>✓ Capitale garantito</span>
+        <span>✓ Rivalutazione consolidata annua</span>
+        <span>✓ Impignorabile · insequestrabile</span>
+        ${r==='conservativo'?'<span style="color:var(--gn);font-weight:700">★ Soluzione principale per profilo conservativo</span>':''}
+      </div>
+    </div>`;
+  }
+  out+=`<div class="notebox">
+    Verifica ISIN su <a href="https://morningstar.it" target="_blank">Morningstar.it</a> / <a href="https://quantalys.it" target="_blank">Quantalys.it</a> ·
+    ISC su <a href="https://www.covip.it/isc_dinamico/" target="_blank">COVIP ISC Dinamico</a> ·
+    Rendimenti FOCUS Allianz 2020–2025 · Soggetta a profilazione MiFID II/IDD. <em>Rendimenti passati non garantiscono risultati futuri.</em>
+  </div></div>`;
+  return out;
+}
+
+/* ═══════════════════════════════════════
+   TAB FONDI
+═══════════════════════════════════════ */
+function allFunds(){return Object.assign({},FUND_DB,CUSTOM_FUNDS);}
+
+/* ── Sync Analisi Fondi con raccomandazione wizard ──────────────────── */
+function syncFondiWithRec(){
+  // Aggiorna selectedFunds con i fondi PAC del profilo corrente
+  // NON chiama initFondiTab qui — ci pensa switchTab con il timing corretto
+  const r=S.risk||'moderato';
+  const fondi=FONDI[r];
+  if(!fondi||!fondi.pac) return;
+  const db=allFunds();
+  const newSel=new Set();
+  fondi.pac.forEach(f=>{ if(db[f.n]) newSel.add(f.n); });
+  if(newSel.size>0) selectedFunds=newSel;
+}
+
+
+function initFondiTab(){
+  populateCatalogSelect();
+  buildFundChecks();
+  updateReturnsChart();
+  updateMetricsTable();
+  populateVsSelects();
+}
+
+
+function previewCatalogFund(){
+  const name=document.getElementById('catalogSelect').value;
+  const box=document.getElementById('catalogPreview');
+  if(!name||!box){if(box)box.innerHTML='';return;}
+  const f=FUND_DB[name];if(!f){box.innerHTML='';return;}
+  const sh=f.sharpe!==undefined?f.sharpe:sharpeOf(f.returns);
+  const so=f.sortino!==undefined?f.sortino:sortinoOf(f.returns);
+  const cum=(f.returns.reduce((a,b)=>a*(1+b/100),1)-1)*100;
+  const mn=f.returns.reduce((a,b)=>a+b,0)/f.returns.length;
+  const shColor=sh>=0.2?'#4ADE80':sh>=0?'#FBBF24':'#F87171';
+  const already=selectedFunds.has(name);
+  box.innerHTML=`<div style="display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:${f.color}11;border:1.5px solid ${f.color}44;border-radius:12px;flex-wrap:wrap;">
+    <div style="width:10px;height:10px;border-radius:50%;background:${f.color};margin-top:3px;flex-shrink:0;box-shadow:0 0 8px ${f.color}88"></div>
+    <div style="flex:1;min-width:180px">
+      <div style="font-size:13px;font-weight:800;color:var(--tx);margin-bottom:2px">${name} ${already?'<span style="color:var(--gn);font-size:11px;font-weight:700">✓ già nel confronto</span>':''}</div>
+      <div style="font-size:10px;color:var(--txs);margin-bottom:6px">${f.cat} · ${f.years.length} anni dati · ${f.years[0]}–${f.years[f.years.length-1]}</div>
+      ${f.note?`<div style="font-size:10px;color:${f.color}aa;margin-bottom:6px">${f.note}</div>`:''}
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:var(--cy)">${fmtD(mn)}%</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Media ann.</div>
+      </div>
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:${shColor}">${fmtD(sh)}</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Sharpe</div>
+      </div>
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:${shColor}">${fmtD(so)}</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Sortino</div>
+      </div>
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:var(--gn)">${fmtD(cum)}%</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Cumulato</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function addFromCatalog(){
+  const name=document.getElementById('catalogSelect').value;
+  if(!name){alert('Seleziona prima un fondo dal menu');return;}
+  selectedFunds.add(name);
+  buildFundChecks();
+  updateReturnsChart();
+  updateMetricsTable();
+  populateCatalogSelect();
+  previewCatalogFund();
+}
+
+function removeFromCatalog(){
+  const name=document.getElementById('catalogSelect').value;
+  if(!name) return;
+  selectedFunds.delete(name);
+  buildFundChecks();
+  updateReturnsChart();
+  updateMetricsTable();
+  populateCatalogSelect();
+  previewCatalogFund();
+}
+function buildFundChecks(){
+  const fc=document.getElementById('fundChecks');
+  if(!fc) return;
+  const all=allFunds();
+  fc.innerHTML=Object.entries(all).map(([name,f])=>{
+    const on=selectedFunds.has(name);
+    return `<label class="fck ${on?'on':''}" style="${on?`background:${f.color}22;border-color:${f.color};color:${f.color}`:''}">
+      <input type="checkbox" ${on?'checked':''} onchange="toggleFund('${name}',this,this.closest('.fck'))">${name}
+    </label>`;
+  }).join('');
+}
+function toggleFund(name,inp,el){
+  if(inp.checked){selectedFunds.add(name);const f=allFunds()[name];el.classList.add('on');el.style.cssText=`background:${f.color}22;border-color:${f.color};color:${f.color}`;}
+  else{selectedFunds.delete(name);el.classList.remove('on');el.style.cssText='';}
+  updateReturnsChart();updateMetricsTable();
+}
+function updateReturnsChart(){
+  const ctx=document.getElementById('returnsChart');
+  if(!ctx) return;
+  const datasets=[];
+  selectedFunds.forEach(name=>{
+    const f=allFunds()[name];if(!f)return;
+    datasets.push({
+      label:name,
+      data:ALL_YEARS.map(y=>{const i=f.years.indexOf(y);return i>=0?f.returns[i]:null;}),
+      backgroundColor:f.color+'88',borderColor:f.color,borderWidth:1.5,borderRadius:4,
+    });
+  });
+  if(returnsChart) returnsChart.destroy();
+  returnsChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels:ALL_YEARS.map(String),datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#7A809A',font:{size:11}}},
+        tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw!==null?c.raw.toFixed(2)+'%':'n.d.'}`}}
+      },
+      scales:{
+        x:{ticks:{color:'#7A809A',font:{size:11}},grid:{color:'rgba(255,255,255,.05)'}},
+        y:{ticks:{color:'#7A809A',font:{size:11},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.05)'},
+           title:{display:true,text:'Rendimento %',color:'#44485C',font:{size:10}}}
+      }
+    }
+  });
+}
+function updateMetricsTable(){
+  const tbl=document.getElementById('metricsTable');
+  if(!tbl) return;
+  const rows=[];
+  const all=allFunds();
+  selectedFunds.forEach(name=>{
+    const f=all[name];if(!f)return;
+    const sh=f.sharpe!==undefined?f.sharpe:sharpeOf(f.returns);
+    const so=f.sortino!==undefined?f.sortino:sortinoOf(f.returns);
+    const cum=(f.returns.reduce((a,b)=>a*(1+b/100),1)-1)*100;
+    const mean=f.returns.reduce((a,b)=>a+b,0)/f.returns.length;
+    const md=Math.min(...f.returns);
+    rows.push({name,color:f.color,cat:f.cat||'—',sh,so,cum,mean,md,yrs:f.years.length,neonato:!!f.neonato});
+  });
+  rows.sort((a,b)=>b.sh-a.sh);
+  let h=`<thead><tr><th>Fondo</th><th>Categoria</th><th>Anni</th><th>Media ann.</th><th>Max DD</th><th>Cumulato</th><th>Sharpe</th><th>Sortino</th></tr></thead><tbody>`;
+  rows.forEach((row,i)=>{
+    const sc=row.sh>=0.2?'#4ADE80':row.sh>=0?'#FBBF24':'#F87171';
+    const soc=row.so>=0.2?'#4ADE80':row.so>=0?'#FBBF24':'#F87171';
+    const neoTag=row.neonato?'<span class="pill" style="margin-left:5px;background:rgba(251,191,36,.12);color:#FBBF24;font-size:9px" title="Storico riferito al fondo sottostante GSAM pre-lancio wrapper Allianz">⚠ neonato</span>':'';
+    h+=`<tr><td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${row.color};margin-right:6px;"></span><b>${row.name}</b>${i===0?'<span class="pill" style="margin-left:6px;background:var(--gnd);color:var(--gn);font-size:9px">★ Best</span>':''}${neoTag}</td>
+      <td style="color:var(--txs)">${row.cat}</td><td style="color:var(--txs)">${row.yrs}</td>
+      <td>${fmtD(row.mean)}%</td>
+      <td style="color:${row.md<-10?'#F87171':'#FBBF24'}">${fmtD(row.md)}%</td>
+      <td style="font-weight:700;color:var(--cy)">${fmtD(row.cum)}%</td>
+      <td><span class="pill" style="background:${sc}22;color:${sc}">${fmtD(row.sh)}</span></td>
+      <td><span class="pill" style="background:${soc}22;color:${soc}">${fmtD(row.so)}</span></td>
+    </tr>`;
+  });
+  tbl.innerHTML=h+'</tbody>';
+}
+/* ── VS Comparator ─────────────────────────────────────────── */
+let vsBarRef=null;
+
+function populateVsSelects(){
+  const db=allFunds();
+  const groups={};
+  Object.entries(db).forEach(([name,f])=>{
+    const g=f.cat||'Altro';
+    if(!groups[g]) groups[g]=[];
+    groups[g].push(name);
+  });
+  const order=['Azionario Globale (SV)','Azionario Globale','Azionario Tematico','Bilanciato Moderato','Bilanciato Difensivo','Bilanciato Multi-Asset','Obbligazionario Flessibile','Obbligazionario Euro','Investimento Programmato','Profilo'];
+  const sorted=[...order.filter(k=>groups[k]),...Object.keys(groups).filter(k=>!order.includes(k))];
+  function buildOpts(skipName){
+    let h='<option value="">— Scegli —</option>';
+    sorted.forEach(cat=>{
+      if(!groups[cat]) return;
+      h+=`<optgroup label="${cat}">`;
+      groups[cat].forEach(name=>{
+        h+=`<option value="${name}">${name}</option>`;
+      });
+      h+='</optgroup>';
+    });
+    return h;
+  }
+  const lSel=document.getElementById('vsLeft');
+  const rSel=document.getElementById('vsRight');
+  if(!lSel||!rSel) return;
+  lSel.innerHTML=buildOpts('');
+  rSel.innerHTML=buildOpts('');
+  // Default: A = primo fondo selezionato, B = Pet & Animals o altro
+  const defA=[...selectedFunds][0]||'Goldman Sachs Az.';
+  const defB=Object.keys(db).find(n=>n!==defA&&db[n].cat&&db[n].cat.includes('Tema'))||Object.keys(db).find(n=>n!==defA)||Object.keys(db)[1];
+  lSel.value=defA;
+  rSel.value=defB;
+  renderVsComparison();
+}
+
+function renderVsComparison(){
+  const lName=document.getElementById('vsLeft').value;
+  const rName=document.getElementById('vsRight').value;
+  const kpiEl=document.getElementById('vsKpiGrid');
+  const verEl=document.getElementById('vsVerdict');
+  if(!lName||!rName||lName===rName){
+    if(kpiEl)kpiEl.innerHTML='';
+    if(verEl)verEl.innerHTML='';
+    return;
+  }
+  const db=allFunds();
+  const fA=db[lName], fB=db[rName];
+  if(!fA||!fB) return;
+
+  // Anni comuni
+  const setB=new Set(fB.years);
+  const commonYrs=fA.years.filter(y=>setB.has(y));
+  if(commonYrs.length===0){
+    if(kpiEl)kpiEl.innerHTML='<div class="istrip" style="background:rgba(255,77,109,.08);border:1px solid rgba(255,77,109,.2)"><div style="color:#F87171;font-size:11px">I due fondi non hanno anni in comune — scegli un altro abbinamento.</div></div>';
+    if(verEl)verEl.innerHTML='';
+    return;
+  }
+  const rA=commonYrs.map(y=>fA.returns[fA.years.indexOf(y)]);
+  const rB=commonYrs.map(y=>fB.returns[fB.years.indexOf(y)]);
+
+  // Chart
+  if(vsBarRef){vsBarRef.destroy();vsBarRef=null;}
+  const cvs=document.getElementById('vsBarChart');
+  if(cvs&&cvs.offsetParent!==null||(cvs&&cvs.closest('.tab-panel.act'))){
+    vsBarRef=new Chart(cvs.getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:commonYrs.map(y=>y+''),
+        datasets:[
+          {label:lName,data:rA,backgroundColor:fA.color||'#00F0FF',borderRadius:5,borderSkipped:false},
+          {label:rName,data:rB,backgroundColor:fB.color||'#FFD700',borderRadius:5,borderSkipped:false}
+        ]
+      },
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{
+          legend:{labels:{color:'#8890B0',font:{size:11,weight:'700'}}},
+          tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y>=0?'+':''}${ctx.parsed.y.toFixed(2)}%`}}
+        },
+        scales:{
+          x:{ticks:{color:'#6B729A',font:{size:11}},grid:{color:'rgba(255,255,255,.04)'}},
+          y:{ticks:{color:'#6B729A',font:{size:11},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.06)'},
+             afterDataLimits:a=>{const m=Math.max(Math.abs(a.min),Math.abs(a.max))*1.15;a.min=-m;a.max=m;}}
+        }
+      }
+    });
+  }
+
+  // KPI
+  const mean=r=>r.reduce((a,b)=>a+b,0)/r.length;
+  const cum=r=>(r.reduce((a,b)=>a*(1+b/100),1)-1)*100;
+  const std=r=>{const m=mean(r);return Math.sqrt(r.reduce((a,b)=>a+(b-m)**2,0)/r.length);};
+  const sh=r=>sharpeOf(r);
+  const so=r=>sortinoOf(r);
+  const worst=r=>Math.min(...r);
+
+  const mA=mean(rA),mB=mean(rB);
+  const cA=cum(rA),cB=cum(rB);
+  const vA=std(rA),vB=std(rB);
+  const shA=sh(rA),shB=sh(rB);
+  const soA=so(rA),soB=so(rB);
+  const wA=worst(rA),wB=worst(rB);
+
+  function kpiCell(valA,valB,fmtFn,label,higherBetter=true){
+    const winA=higherBetter?valA>valB:valA<valB;
+    const winB=higherBetter?valB>valA:valB<valA;
+    const colA=winA?'var(--gn)':winB?'var(--co)':'var(--tx)';
+    const colB=winB?'var(--gn)':winA?'var(--co)':'var(--tx)';
+    return `<div class="vs-kpi-row">
+      <div class="vs-kpi-val" style="color:${colA}">${fmtFn(valA)}${winA?' ✓':''}</div>
+      <div class="vs-kpi-label">${label}</div>
+      <div class="vs-kpi-val" style="color:${colB}">${fmtFn(valB)}${winB?' ✓':''}</div>
+    </div>`;
+  }
+  const pct=v=>`${v>=0?'+':''}${v.toFixed(2)}%`;
+  const dec=v=>v.toFixed(2);
+
+  kpiEl.innerHTML=`
+  <div class="vs-kpi-header">
+    <div style="color:var(--cy);font-weight:800;font-size:11px;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${lName}</div>
+    <div style="width:110px;text-align:center"></div>
+    <div style="color:var(--am);font-weight:800;font-size:11px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">${rName}</div>
+  </div>
+  <div class="vs-kpi-grid">
+    ${kpiCell(mA,mB,pct,'Media annua')}
+    ${kpiCell(cA,cB,pct,`Cumulato (${commonYrs.length} anni)`)}
+    ${kpiCell(shA,shB,dec,'Sharpe ratio')}
+    ${kpiCell(soA,soB,dec,'Sortino ratio')}
+    ${kpiCell(wA,wB,pct,'Anno peggiore',false)}
+    ${kpiCell(vA,vB,v=>v.toFixed(2)+'%','Volatilità (std)',false)}
+  </div>`;
+
+  // Verdetto automatico
+  let winPoints=0;
+  if(shA>shB) winPoints+=2; else if(shB>shA) winPoints-=2;
+  if(soA>soB) winPoints+=1.5; else if(soB>soA) winPoints-=1.5;
+  if(mA>mB) winPoints+=1; else if(mB>mA) winPoints-=1;
+  if(wA>wB) winPoints+=1; else if(wB>wA) winPoints-=1;
+  if(vA<vB) winPoints+=0.5; else if(vB<vA) winPoints-=0.5;
+
+  const winner=winPoints>0?lName:winPoints<0?rName:null;
+  const loser=winner===lName?rName:winner===rName?lName:null;
+
+  const diffSh=Math.abs(shA-shB).toFixed(2);
+  const diffM=Math.abs(mA-mB).toFixed(2);
+  const diffCum=Math.abs(cA-cB).toFixed(2);
+  const betterW=wA>=wB?`${lName} regge meglio nelle fasi negative (anno peggiore ${pct(wA)} vs ${pct(wB)})`:`${rName} ha retto meglio nelle fasi negative (anno peggiore ${pct(wB)} vs ${pct(wA)})`;
+
+  let verdText='';
+  if(winner){
+    const loserName=loser||"l'altro";
+    verdText=`<b>${winner}</b> prevale su ${loserName} con un Sharpe ratio ${winPoints>0?shA.toFixed(2)+' vs '+shB.toFixed(2):shB.toFixed(2)+' vs '+shA.toFixed(2)} (differenza: ${diffSh}) — rendimento medio annuo ${winPoints>0?pct(mA):pct(mB)} (+${diffM}% rispetto all'alternativa) e cumulato +${diffCum}% superiore.<br>
+    ${betterW}.<br>
+    <span style="font-size:10px;opacity:.8">Per un portafoglio risk-adjusted il rapporto Sharpe è il metro principale: misura quanto rendimento si ottiene per ogni unità di rischio assunto. Valori >0.20 sono considerati buoni per fondi azionari globali.</span>`;
+  } else {
+    verdText=`I due fondi presentano un profilo di rischio/rendimento equivalente su questo orizzonte temporale. La scelta dipende dalla categoria di investimento e dalla diversificazione cercata.`;
+  }
+
+  const verColor=winPoints>0?'rgba(0,240,255,.1)':winPoints<0?'rgba(255,215,0,.1)':'rgba(255,255,255,.05)';
+  const verBorder=winPoints>0?'rgba(0,240,255,.25)':winPoints<0?'rgba(255,215,0,.25)':'rgba(255,255,255,.1)';
+  verEl.innerHTML=`<div style="background:${verColor};border:1px solid ${verBorder};border-radius:12px;padding:14px 16px;font-size:11px;color:var(--tx);line-height:1.7">
+    <div style="font-size:10px;font-weight:900;color:${winPoints>0?'var(--cy)':'var(--am)'};letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">📊 Verdetto sistema</div>
+    ${verdText}
+  </div>`;
+}
+
+/* ── Catalogo Nuovi Orizzonti ── */
+function populateCatalogSelect(){
+  const sel=document.getElementById('catalogSelect');
+  if(!sel) return;
+  const groups={};
+  Object.entries(FUND_DB).forEach(([name,f])=>{
+    const g=f.cat||'Altro';
+    if(!groups[g]) groups[g]=[];
+    groups[g].push(name);
+  });
+  let html='<option value="">— Scegli un fondo —</option>';
+  const order=['Azionario Globale (SV)','Azionario Globale','Azionario Tematico','Azionario Tecnologia','Bilanciato Moderato','Bilanciato Difensivo','Bilanciato Multi-Asset','Obbligazionario Flessibile','Obbligazionario Euro'];
+  const sorted=[...order.filter(k=>groups[k]),...Object.keys(groups).filter(k=>!order.includes(k))];
+  sorted.forEach(cat=>{
+    html+=`<optgroup label="${cat}">`;
+    groups[cat].forEach(name=>{
+      const active=selectedFunds.has(name);
+      html+=`<option value="${name}"${active?' selected':''}>${name}${active?' ✓':''}</option>`;
+    });
+    html+='</optgroup>';
+  });
+  sel.innerHTML=html;
+}
+
+function previewCatalogFund(){
+  const name=document.getElementById('catalogSelect').value;
+  const box=document.getElementById('catalogPreview');
+  if(!name||!box){if(box)box.innerHTML='';return;}
+  const f=FUND_DB[name];if(!f){box.innerHTML='';return;}
+  const sh=f.sharpe!==undefined?f.sharpe:sharpeOf(f.returns);
+  const so=f.sortino!==undefined?f.sortino:sortinoOf(f.returns);
+  const cum=(f.returns.reduce((a,b)=>a*(1+b/100),1)-1)*100;
+  const mn=f.returns.reduce((a,b)=>a+b,0)/f.returns.length;
+  const shColor=sh>=0.2?'#4ADE80':sh>=0?'#FBBF24':'#F87171';
+  const already=selectedFunds.has(name);
+  box.innerHTML=`<div style="display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:${f.color}11;border:1.5px solid ${f.color}44;border-radius:12px;flex-wrap:wrap;">
+    <div style="width:10px;height:10px;border-radius:50%;background:${f.color};margin-top:4px;flex-shrink:0;box-shadow:0 0 8px ${f.color}88"></div>
+    <div style="flex:1;min-width:180px">
+      <div style="font-size:13px;font-weight:800;color:var(--tx);margin-bottom:2px">${name}${already?' <span style="color:var(--gn);font-size:11px;font-weight:700">✓ già nel confronto</span>':''}</div>
+      <div style="font-size:10px;color:var(--txs);margin-bottom:6px">${f.cat} · ${f.years.length} anni dati · ${f.years[0]}–${f.years[f.years.length-1]}</div>
+      ${f.note?`<div style="font-size:10px;color:${f.color}bb;margin-bottom:4px">${f.note}</div>`:''}
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:var(--cy)">${fmtD(mn)}%</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Media ann.</div>
+      </div>
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:${shColor}">${fmtD(sh)}</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Sharpe</div>
+      </div>
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:${shColor}">${fmtD(so)}</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Sortino</div>
+      </div>
+      <div style="text-align:center;padding:6px 10px;background:var(--bgi);border-radius:8px;border:1px solid var(--bd)">
+        <div style="font-size:14px;font-weight:800;color:var(--gn)">${fmtD(cum)}%</div>
+        <div style="font-size:9px;color:var(--txm);font-weight:700;text-transform:uppercase">Cumulato</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function addFromCatalog(){
+  const name=document.getElementById('catalogSelect').value;
+  if(!name){alert('Seleziona prima un fondo dal menu');return;}
+  selectedFunds.add(name);
+  buildFundChecks();
+  updateReturnsChart();
+  updateMetricsTable();
+  populateCatalogSelect();
+  previewCatalogFund();
+}
+
+function removeFromCatalog(){
+  const name=document.getElementById('catalogSelect').value;
+  if(!name) return;
+  selectedFunds.delete(name);
+  buildFundChecks();
+  updateReturnsChart();
+  updateMetricsTable();
+  populateCatalogSelect();
+  previewCatalogFund();
+}
+
+/* ═══════════════════════════════════════
+   TAB PENSIONE
+═══════════════════════════════════════ */
+let activePrevId=null;
+
+function initPensioneTab(){
+  renderPrevGrid();
+  calcPension();
+  calcProjection();
+}
+
+function renderPrevGrid(){
+  const grid=document.getElementById('prevGrid');
+  if(!grid) return;
+  grid.innerHTML=PREV.map(p=>{
+    const isAct=p.id===activePrevId;
+    return `<div class="prev-card ${p.cls} ${isAct?'act-card':''}" onclick="togglePrevCard('${p.id}')">
+      <div class="prev-type" style="color:${p.typeColor}">${p.type}</div>
+      <div class="prev-name">${p.name}</div>
+      <div class="prev-subtitle">${p.subtitle}</div>
+      <div class="prev-chips">
+        ${p.tfr?`<span class="prev-chip" style="color:#4ADE80;border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.08)">TFR ✓</span>`:''}
+        <span class="prev-chip" style="color:#22D3EE;border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.08)">RITA</span>
+        <span class="prev-chip" style="color:#A78BFA;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08)">${p.comparti.length} comparti</span>
+      </div>
+      <div class="prev-detail">
+        <div>${p.comparti.map(c=>`<div class="comparto-item">
+          <div class="comparto-dot" style="background:${c.c}"></div>
+          <div class="comparto-name">${c.n}</div>
+          <div class="comparto-hz">${c.h}</div>
+        </div>`).join('')}</div>
+        <div style="margin-top:10px">
+          <div class="prev-row"><span>Contributo</span><span>${p.minC}</span></div>
+          <div class="prev-row"><span>Portabilità</span><span>${p.port}</span></div>
+          <div class="prev-row"><span>Anticipi</span><span>${p.anticipi}</span></div>
+          <div class="prev-row"><span>Adatto a</span><span>${p.adatto}</span></div>
+        </div>
+        <div class="isc-note">ISC: <a href="https://www.covip.it/isc_dinamico/" target="_blank" style="color:var(--cy)">COVIP ISC Dinamico</a></div>
+      </div>
+    </div>`;
+  }).join('');
+  renderPrevCompTable();
+}
+
+function togglePrevCard(id){
+  activePrevId=activePrevId===id?null:id;
+  renderPrevGrid();
+}
+
+function renderPrevCompTable(){
+  const tbl=document.getElementById('prevCompTable');
+  if(!tbl) return;
+  tbl.innerHTML=`<thead><tr>
+    <th>Caratteristica</th>
+    <th style="color:#22D3EE">Allianz Insieme</th>
+    <th style="color:#4ADE80">Allianz Previdenza</th>
+    <th style="color:#FBBF24">Orizzonte Previdenza (PIP)</th>
+  </tr></thead><tbody>
+    <tr><td><b>Tipo</b></td><td>Fondo aperto</td><td>Fondo aperto</td><td>PIP assicurativo</td></tr>
+    <tr><td><b>TFR</b></td><td style="color:var(--gn)">Sì</td><td style="color:var(--gn)">Sì</td><td style="color:var(--co)">No</td></tr>
+    <tr><td><b>Ramo I garantito</b></td><td style="color:var(--co)">No</td><td style="color:var(--co)">No</td><td style="color:var(--gn)">Sì</td></tr>
+    <tr><td><b>Costi</b></td><td style="color:var(--gn)">Contenuti</td><td style="color:var(--gn)">Contenuti</td><td style="color:var(--am)">Superiori</td></tr>
+    <tr><td><b>Ideale per</b></td><td>Dipendente · TFR · lungo orizzonte</td><td>Dipendente/autonomo</td><td>Autonomo · flessibilità massima</td></tr>
+    <tr><td colspan="4" style="text-align:center;padding:8px">
+      <a href="https://www.covip.it/isc_dinamico/" target="_blank" style="color:var(--cy);font-weight:700">→ Confronta ISC su COVIP ISC Dinamico</a>
+    </td></tr>
+  </tbody>`;
+}
+
+function calcPension(){
+  const reddito=+(document.getElementById('pReddito')||{value:40000}).value||40000;
+  const contrib=Math.min(+(document.getElementById('pContrib')||{value:2400}).value||2400,MAX_DED);
+  const irpefSenza=calcIRPEF(reddito);
+  const irpefCon=calcIRPEF(reddito-contrib);
+  const saving=irpefSenza-irpefCon;
+  const mr=margRate(reddito);
+  const kpi=document.getElementById('kpiRow');
+  if(kpi) kpi.innerHTML=`
+    <div class="kpi"><div class="kpi-val" style="color:var(--gn)">${fmt(saving)} €</div><div class="kpi-lbl">Risparmio fiscale</div><div class="kpi-sub">annuo IRPEF</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:var(--cy)">${Math.round(mr*100)}%</div><div class="kpi-lbl">Aliquota marginale</div><div class="kpi-sub">IRPEF 2026</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:var(--am)">${fmt(contrib-saving)} €</div><div class="kpi-lbl">Costo netto</div><div class="kpi-sub">al netto del beneficio</div></div>
+  `;
+  const levels=[20000,28000,35000,50000,70000,100000];
+  const sav=document.getElementById('savBars');
+  if(sav){
+    const saves=levels.map(l=>calcIRPEF(l)-calcIRPEF(l-MAX_DED));
+    const mx=Math.max(...saves);
+    sav.innerHTML=levels.map((l,i)=>`<div class="sav-row">
+      <div class="sav-label">Reddito ${fmt(l)} €</div>
+      <div class="sav-track"><div class="sav-fill" style="width:${mx?saves[i]/mx*100:0}%;background:linear-gradient(90deg,#003781,#22D3EE)"></div></div>
+      <div class="sav-amt">${fmt(saves[i])} €</div>
+    </div>`).join('');
+  }
+}
+
+function calcProjection(){
+  const contrib=+(document.getElementById('pjContrib')||{value:2400}).value||2400;
+  const rendLordo=(+(document.getElementById('pjRend')||{value:3.5}).value||3.5)/100;
+  const years=+(document.getElementById('pjYears')||{value:25}).value||25;
+  const rendNetto=rendLordo*(1-.20);
+  const tbl=document.getElementById('projTable');
+  if(!tbl) return;
+  const irpefSav=calcIRPEF(40000)-calcIRPEF(40000-Math.min(contrib,MAX_DED));
+  let h=`<thead><tr><th>Anno</th><th>Vers./anno</th><th>Fondo lordo</th><th>Tax uscita</th><th>Capitale netto</th><th>Risp. IRPEF cum.*</th></tr></thead><tbody>`;
+  let fondo=0,irpefTot=0;
+  for(let yr=1;yr<=years;yr++){
+    fondo=(fondo+contrib)*(1+rendNetto);
+    irpefTot+=irpefSav;
+    const taxRate=Math.max(.09,.15-(yr>15?(yr-15)*.003:0));
+    const netto=fondo*(1-taxRate);
+    const hl=yr===5||yr===10||yr===15||yr===20||yr===25||yr===years;
+    h+=`<tr${hl?' class="hl"':''}>
+      <td style="font-weight:${hl?700:400}">${yr}</td>
+      <td style="color:var(--txs)">${fmt(contrib)}</td>
+      <td style="color:var(--cy);font-weight:${hl?700:400}">${fmt(fondo)}</td>
+      <td style="color:var(--txs)">${Math.round(taxRate*100)}%</td>
+      <td style="color:var(--gn);font-weight:${hl?700:400}">${fmt(netto)}</td>
+      <td style="color:var(--am)">${fmt(irpefTot)}</td>
+    </tr>`;
+  }
+  tbl.innerHTML=h+'</tbody>';
+}
+
+/* INIT */
+renderStep();
+</script>
+</body>
+</html>
