@@ -1,707 +1,707 @@
 {
-  "_meta": {
-    "version": "1.0",
-    "last_updated": "2026-06-27",
-    "source": "super_consulente_v3.html",
-    "description": "Dati fondi Allianz — aggiornato automaticamente dalla skill aggiorna-fondi"
-  },
-  "fund_db": {
-    "PIMCO Obblig. Prudente": {
-      "color": "#FDE68A",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        1.58,
-        -1.46,
-        -3.36,
-        3.68,
-        4.64,
-        2.36
-      ],
-      "cat": "Inv. Programmato",
-      "note": "Bassa duration · bassa volatilità · rendimento positivo 24 mesi · lancio mar 2019"
+    "_meta": {
+          "version": "1.0",
+          "last_updated": "2026-07-07",
+          "source": "Focus Fondi Maggio 2026 (dati al 29/05/2026)",
+          "description": "Dati fondi Allianz — aggiornato automaticamente dalla skill aggiorna-fondi"
     },
-    "Profilo Prudente": {
-      "color": "#6EE7B7",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        3.2,
-        4.55,
-        -15.21,
-        6.21,
-        3.6,
-        1.35
-      ],
-      "cat": "Profilo · Bilanciato Difensivo",
-      "note": "Az 24% · Obbl 67% · AR 8% · lancio mar 2019 · +3,3% dal lancio"
+    "fund_db": {
+          "PIMCO Obblig. Prudente": {
+                  "color": "#FDE68A",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            1.58,
+                            -1.46,
+                            -3.36,
+                            3.68,
+                            4.64,
+                            2.36
+                  ],
+                  "cat": "Inv. Programmato",
+                  "note": "Bassa duration · bassa volatilità · rendimento positivo 24 mesi · lancio mar 2019 · YTD 2026: +0,74%"
+          },
+          "Profilo Prudente": {
+                  "color": "#6EE7B7",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            3.2,
+                            4.55,
+                            -15.21,
+                            6.21,
+                            3.6,
+                            1.35
+                  ],
+                  "cat": "Profilo · Bilanciato Difensivo",
+                  "note": "Az 24% · Obbl 67% · AR 8% · lancio mar 2019 · +3,3% dal lancio · YTD 2026: +3,28%"
+          },
+          "Profilo Moderato": {
+                  "color": "#60A5FA",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            5.38,
+                            8.68,
+                            -17.07,
+                            7.4,
+                            4.81,
+                            3.68
+                  ],
+                  "cat": "Profilo · Bilanciato Moderato",
+                  "note": "Az 44% · Obbl 47% · AR 8% · lancio mar 2019 · +13,6% dal lancio · YTD 2026: +5,03%"
+          },
+          "Profilo Dinamico": {
+                  "color": "#3B82F6",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            5.38,
+                            12.75,
+                            -18.43,
+                            8.72,
+                            5.51,
+                            5.08
+                  ],
+                  "cat": "Profilo · Azionario Bilanciato",
+                  "note": "Az 65% · Obbl 27% · AR 8% · lancio mar 2019 · +22,0% dal lancio · YTD 2026: +7,06%"
+          },
+          "Bilanciato Prudente Cl.D": {
+                  "color": "#A7F3D0",
+                  "years": [
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -0.37,
+                            -17.95,
+                            8.13,
+                            1.19,
+                            2.77
+                  ],
+                  "cat": "Profilo · Bilanciato Difensivo",
+                  "note": "Az 20% · Obbl 80% · Classe D · lancio ott 2021 · YTD 2026: +1,69%"
+          },
+          "Azionario Cl.E (AllianzGI)": {
+                  "color": "#0047AA",
+                  "years": [
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            3.35,
+                            -16.05,
+                            15.45,
+                            13.98,
+                            4.52
+                  ],
+                  "cat": "Profilo · Azionario",
+                  "note": "Az 84% · gestione attiva AllianzGI · Classe E · +21,8% dal lancio · YTD 2026: +6,89%"
+          },
+          "Bilanciato Cl.E (AllianzGI)": {
+                  "color": "#1D4ED8",
+                  "years": [
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            1.67,
+                            -18.98,
+                            12.28,
+                            11.69,
+                            3.42
+                  ],
+                  "cat": "Profilo · Bilanciato",
+                  "note": "Az 50% · Obbl 50% · AllianzGI · Classe E · +8,7% dal lancio · YTD 2026: +5,59%"
+          },
+          "Goldman Sachs Az.": {
+                  "color": "#22D3EE",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -0.28,
+                            11.81,
+                            -13.82,
+                            10.61,
+                            12.32,
+                            8.63
+                  ],
+                  "sharpe": 0.23,
+                  "sortino": 0.2,
+                  "cat": "Azionario · Nuovi Orizzonti",
+                  "neonato": true,
+                  "note": "Wrapper Allianz lanciato 2025 (neonato per FOCUS) · storico fondo sottostante GSAM · +42,9% GSAM · YTD 2026: +5,95% · NON appartiene a Squadra Vincente"
+          },
+          "AllianzGI Italia (SV)": {
+                  "color": "#2563EB",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -2.05,
+                            7.77,
+                            -16.03,
+                            4.6,
+                            6.1,
+                            7.33
+                  ],
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore AllianzGI · +38,6% dal lancio · YTD 2026: +4,97%"
+          },
+          "BlackRock (SV)": {
+                  "color": "#374151",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            2.1,
+                            4.29,
+                            -16.5,
+                            6.9,
+                            11.3,
+                            3.8
+                  ],
+                  "sharpe": -0.06,
+                  "sortino": -0.07,
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "★ Miglior SV · Sharpe -0.06 (top SV) · +59,8% cumulato · top 2024 (+11,3%) · YTD 2026: +7,20%"
+          },
+          "Fidelity (SV)": {
+                  "color": "#B45309",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -5.3,
+                            5.0,
+                            -14.1,
+                            5.9,
+                            10.1,
+                            -0.4
+                  ],
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore Fidelity · +6,50% dal lancio · YTD 2026: +6,10%"
+          },
+          "Franklin Templeton (SV)": {
+                  "color": "#7C3AED",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            0.02,
+                            6.44,
+                            -14.81,
+                            6.54,
+                            8.4,
+                            1.72
+                  ],
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore Franklin Templeton · +14,6% dal lancio · YTD 2026: +6,01%"
+          },
+          "Morgan Stanley (SV)": {
+                  "color": "#0891B2",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -1.47,
+                            2.39,
+                            -17.61,
+                            6.78,
+                            11.74,
+                            0.83
+                  ],
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore Morgan Stanley · +44,1% dal lancio · YTD 2026: +3,50%"
+          },
+          "Pictet (SV)": {
+                  "color": "#059669",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -1.19,
+                            4.94,
+                            -16.17,
+                            5.75,
+                            7.65,
+                            3.69
+                  ],
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore Pictet · +36,4% dal lancio · YTD 2026: +4,27%"
+          },
+          "PIMCO (SV)": {
+                  "color": "#DC2626",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            4.69,
+                            3.74,
+                            -16.03,
+                            5.48,
+                            6.56,
+                            6.42
+                  ],
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore PIMCO · +28,2% dal lancio · YTD 2026: +5,11%"
+          },
+          "JPMorgan (SV)": {
+                  "color": "#1E3A5F",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            1.5,
+                            5.2,
+                            -15.8,
+                            6.4,
+                            9.8,
+                            2.9
+                  ],
+                  "sharpe": -0.08,
+                  "sortino": -0.09,
+                  "cat": "Squadra Vincente · Bilanciato",
+                  "note": "Gestore JPMorgan Asset Management · dati indicativi · SV Nuovi Orizzonti"
+          },
+          "Obblig. Strategico (PIMCO)": {
+                  "color": "#FBBF24",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            0.26,
+                            -2.05,
+                            -12.57,
+                            5.13,
+                            2.64,
+                            5.87
+                  ],
+                  "sharpe": -0.39,
+                  "sortino": -0.29,
+                  "cat": "Tema · Obbligazionario Flessibile",
+                  "note": "100% obbligaz. PIMCO · carry positivo 2025/26 · lancio ott 2019 · YTD 2026: -0,05%"
+          },
+          "Obbligazionario (AllianzGI)": {
+                  "color": "#F59E0B",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            0.54,
+                            -2.74,
+                            -11.86,
+                            3.82,
+                            1.5,
+                            0.75
+                  ],
+                  "cat": "Tema · Obbligazionario",
+                  "note": "100% obbligaz. AllianzGI · corporate EUR focus · lancio mar 2019 · YTD 2026: -0,02%"
+          },
+          "Pet & Animals": {
+                  "color": "#A78BFA",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            26.2,
+                            20.46,
+                            -24.15,
+                            7.46,
+                            2.9,
+                            -10.83
+                  ],
+                  "sharpe": 0.06,
+                  "sortino": 0.06,
+                  "cat": "Tema · Azionario Tematico",
+                  "note": "Tema animali domestici · alta volatilità · satellite · lancio mar 2019 · YTD 2026: -5,22%"
+          },
+          "Investimenti Sostenibili": {
+                  "color": "#4ADE80",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -1.12,
+                            6.41,
+                            -13.15,
+                            7.29,
+                            7.06,
+                            3.71
+                  ],
+                  "cat": "Tema · ESG/SRI",
+                  "note": "ESG AllianzGI · Az 41% Obbl 33% Flex 26% · lancio mar 2019 · YTD 2026: +4,71%"
+          },
+          "Best in Class": {
+                  "color": "#86EFAC",
+                  "years": [
+                            2020,
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -1.55,
+                            6.96,
+                            -14.01,
+                            4.58,
+                            9.49,
+                            4.39
+                  ],
+                  "cat": "Tema · Multi-Asset",
+                  "note": "Multi-gestore best-in-class · Az 54% Obbl 25% Flex 21% · lancio gen 2020 · YTD 2026: +7,63%"
+          },
+          "Best Equity": {
+                  "color": "#10B981",
+                  "years": [
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            9.78,
+                            -18.63,
+                            11.69,
+                            12.85,
+                            6.26
+                  ],
+                  "sharpe": 0.14,
+                  "sortino": 0.09,
+                  "cat": "Tema · Azionario",
+                  "note": "Azionario AllianzGI · 96% Az · +35,9% dal lancio · YTD 2026: +13,62%"
+          },
+          "Automatic 40": {
+                  "color": "#F97316",
+                  "years": [
+                            2021,
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            1.18,
+                            -12.14,
+                            6.96,
+                            3.99,
+                            2.21
+                  ],
+                  "cat": "Tema · Bilanciato Difensivo",
+                  "note": "Az 34% Obbl 56% Flex 9% · AllianzGI · lancio feb 2021 · YTD 2026: +4,17%"
+          },
+          "Risk Control": {
+                  "color": "#CBD5E1",
+                  "years": [
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            2.4,
+                            2.16,
+                            1.12
+                  ],
+                  "cat": "Tema · Obbligazionario Breve",
+                  "note": "100% obbl. breve · bassa volatilità · lancio nov 2022 · YTD 2026: +0,01%"
+          },
+          "AZ Rend. Italia 35 Inflation": {
+                  "color": "#22C55E",
+                  "years": [
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -3.2,
+                            9.1,
+                            3.7,
+                            3.1
+                  ],
+                  "cat": "Tema · Obbligaz. BTP",
+                  "note": "BTP ital + az globale · scad. 25/10/2035 · obiettivo inflazione · lancio nov 2022 · YTD 2026: +0,50%"
+          },
+          "AZ Rend. Italia 35 Smart Eq.": {
+                  "color": "#16A34A",
+                  "years": [
+                            2022,
+                            2023,
+                            2024,
+                            2025
+                  ],
+                  "returns": [
+                            -5.5,
+                            11.9,
+                            6.1,
+                            4.3
+                  ],
+                  "cat": "Tema · Bilanciato BTP",
+                  "note": "BTP stripped 2035 (66%) + az globale · scad. 12/04/2035 · lancio nov 2022 · YTD 2026: +1,60%"
+          }
     },
-    "Profilo Moderato": {
-      "color": "#60A5FA",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        5.38,
-        8.68,
-        -17.07,
-        7.4,
-        4.81,
-        3.68
-      ],
-      "cat": "Profilo · Bilanciato Moderato",
-      "note": "Az 44% · Obbl 47% · AR 8% · lancio mar 2019 · +13,6% dal lancio"
-    },
-    "Profilo Dinamico": {
-      "color": "#3B82F6",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        5.38,
-        12.75,
-        -18.43,
-        8.72,
-        5.51,
-        5.08
-      ],
-      "cat": "Profilo · Azionario Bilanciato",
-      "note": "Az 65% · Obbl 27% · AR 8% · lancio mar 2019 · +22,0% dal lancio"
-    },
-    "Bilanciato Prudente Cl.D": {
-      "color": "#A7F3D0",
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -0.37,
-        -17.95,
-        8.13,
-        1.19,
-        2.77
-      ],
-      "cat": "Profilo · Bilanciato Difensivo",
-      "note": "Az 20% · Obbl 80% · Classe D · lancio ott 2021"
-    },
-    "Azionario Cl.E (AllianzGI)": {
-      "color": "#0047AA",
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        3.35,
-        -16.05,
-        15.45,
-        13.98,
-        4.52
-      ],
-      "cat": "Profilo · Azionario",
-      "note": "Az 84% · gestione attiva AllianzGI · Classe E · +21,8% dal lancio"
-    },
-    "Bilanciato Cl.E (AllianzGI)": {
-      "color": "#1D4ED8",
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        1.67,
-        -18.98,
-        12.28,
-        11.69,
-        3.42
-      ],
-      "cat": "Profilo · Bilanciato",
-      "note": "Az 50% · Obbl 50% · AllianzGI · Classe E · +8,7% dal lancio"
-    },
-    "Goldman Sachs Az.": {
-      "color": "#22D3EE",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -0.28,
-        11.81,
-        -13.82,
-        10.61,
-        12.32,
-        8.63
-      ],
-      "sharpe": 0.23,
-      "sortino": 0.2,
-      "cat": "Azionario · Nuovi Orizzonti",
-      "neonato": true,
-      "note": "Wrapper Allianz lanciato 2025 (neonato per FOCUS) · storico fondo sottostante GSAM · +38,3% GSAM · YTD 2026: +2,55% · NON appartiene a Squadra Vincente"
-    },
-    "AllianzGI Italia (SV)": {
-      "color": "#2563EB",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -2.05,
-        7.77,
-        -16.03,
-        4.6,
-        6.1,
-        7.33
-      ],
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore AllianzGI · +33,3% dal lancio · YTD 2026: +0,96%"
-    },
-    "BlackRock (SV)": {
-      "color": "#374151",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        2.1,
-        4.29,
-        -16.5,
-        6.9,
-        11.3,
-        3.8
-      ],
-      "sharpe": -0.06,
-      "sortino": -0.07,
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "★ Miglior SV · Sharpe -0.06 (top SV) · +9,8% cumulato · top 2024 (+11,3%) · YTD 2026: +3,60%"
-    },
-    "Fidelity (SV)": {
-      "color": "#B45309",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -5.3,
-        5.0,
-        -14.1,
-        5.9,
-        10.1,
-        -0.4
-      ],
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Fidelity · +3,1% dal lancio · YTD 2026: +2,70%"
-    },
-    "Franklin Templeton (SV)": {
-      "color": "#7C3AED",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        0.02,
-        6.44,
-        -14.81,
-        6.54,
-        8.4,
-        1.72
-      ],
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Franklin Templeton · +11,0% dal lancio · YTD 2026: +2,74%"
-    },
-    "Morgan Stanley (SV)": {
-      "color": "#0891B2",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -1.47,
-        2.39,
-        -17.61,
-        6.78,
-        11.74,
-        0.83
-      ],
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Morgan Stanley · +39,6% dal lancio · YTD 2026: +0,31%"
-    },
-    "Pictet (SV)": {
-      "color": "#059669",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -1.19,
-        4.94,
-        -16.17,
-        5.75,
-        7.65,
-        3.69
-      ],
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Pictet · +30,6% dal lancio · YTD 2026: +0,85%"
-    },
-    "PIMCO (SV)": {
-      "color": "#DC2626",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        4.69,
-        3.74,
-        -16.03,
-        5.48,
-        6.56,
-        6.42
-      ],
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore PIMCO · +24,2% dal lancio · YTD 2026: +1,82%"
-    },
-    "JPMorgan (SV)": {
-      "color": "#1E3A5F",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        1.5,
-        5.2,
-        -15.8,
-        6.4,
-        9.8,
-        2.9
-      ],
-      "sharpe": -0.08,
-      "sortino": -0.09,
-      "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore JPMorgan Asset Management · dati indicativi · SV Nuovi Orizzonti"
-    },
-    "Obblig. Strategico (PIMCO)": {
-      "color": "#FBBF24",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        0.26,
-        -2.05,
-        -12.57,
-        5.13,
-        2.64,
-        5.87
-      ],
-      "sharpe": -0.39,
-      "sortino": -0.29,
-      "cat": "Tema · Obbligazionario Flessibile",
-      "note": "100% obbligaz. PIMCO · carry positivo 2025/26 · lancio ott 2019"
-    },
-    "Obbligazionario (AllianzGI)": {
-      "color": "#F59E0B",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        0.54,
-        -2.74,
-        -11.86,
-        3.82,
-        1.5,
-        0.75
-      ],
-      "cat": "Tema · Obbligazionario",
-      "note": "100% obbligaz. AllianzGI · corporate EUR focus · lancio mar 2019"
-    },
-    "Pet & Animals": {
-      "color": "#A78BFA",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        26.2,
-        20.46,
-        -24.15,
-        7.46,
-        2.9,
-        -10.83
-      ],
-      "sharpe": 0.06,
-      "sortino": 0.06,
-      "cat": "Tema · Azionario Tematico",
-      "note": "Tema animali domestici · alta volatilità · satellite · lancio mar 2019"
-    },
-    "Investimenti Sostenibili": {
-      "color": "#4ADE80",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -1.12,
-        6.41,
-        -13.15,
-        7.29,
-        7.06,
-        3.71
-      ],
-      "cat": "Tema · ESG/SRI",
-      "note": "ESG AllianzGI · Az 41% Obbl 33% Flex 26% · lancio mar 2019"
-    },
-    "Best in Class": {
-      "color": "#86EFAC",
-      "years": [
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -1.55,
-        6.96,
-        -14.01,
-        4.58,
-        9.49,
-        4.39
-      ],
-      "cat": "Tema · Multi-Asset",
-      "note": "Multi-gestore best-in-class · Az 54% Obbl 25% Flex 21% · lancio gen 2020"
-    },
-    "Best Equity": {
-      "color": "#10B981",
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        9.78,
-        -18.63,
-        11.69,
-        12.85,
-        6.26
-      ],
-      "sharpe": 0.14,
-      "sortino": 0.09,
-      "cat": "Tema · Azionario",
-      "note": "Azionario AllianzGI · 96% Az · +26,9% dal lancio · YTD 2026: +6,07%"
-    },
-    "Automatic 40": {
-      "color": "#F97316",
-      "years": [
-        2021,
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        1.18,
-        -12.14,
-        6.96,
-        3.99,
-        2.21
-      ],
-      "cat": "Tema · Bilanciato Difensivo",
-      "note": "Az 34% Obbl 56% Flex 9% · AllianzGI · lancio feb 2021"
-    },
-    "Risk Control": {
-      "color": "#CBD5E1",
-      "years": [
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        2.4,
-        2.16,
-        1.12
-      ],
-      "cat": "Tema · Obbligazionario Breve",
-      "note": "100% obbl. breve · bassa volatilità · lancio nov 2022"
-    },
-    "AZ Rend. Italia 35 Inflation": {
-      "color": "#22C55E",
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -3.2,
-        9.1,
-        3.7,
-        3.1
-      ],
-      "cat": "Tema · Obbligaz. BTP",
-      "note": "BTP ital + az globale · scad. 25/10/2035 · obiettivo inflazione · lancio nov 2022"
-    },
-    "AZ Rend. Italia 35 Smart Eq.": {
-      "color": "#16A34A",
-      "years": [
-        2022,
-        2023,
-        2024,
-        2025
-      ],
-      "returns": [
-        -5.5,
-        11.9,
-        6.1,
-        4.3
-      ],
-      "cat": "Tema · Bilanciato BTP",
-      "note": "BTP stripped 2035 (66%) + az globale · scad. 12/04/2035 · lancio nov 2022"
+    "fondi": {
+          "conservativo": {
+                  "pac": [
+                            {
+                                        "n": "Gestione Separata VitARIV",
+                                        "p": 60,
+                                        "sh": "—",
+                                        "so": "—",
+                                        "d": "Garanzia 0% a 10 anni · rivalutazione annua consolidata"
+                            },
+                            {
+                                        "n": "Profilo Prudente",
+                                        "p": 25,
+                                        "sh": "0.06",
+                                        "so": "0.03",
+                                        "d": "Bilanciato difensivo · bassa volatilità · orizzonte 5 anni"
+                            },
+                            {
+                                        "n": "Obblig. Strategico (PIMCO)",
+                                        "p": 15,
+                                        "sh": "-0.39",
+                                        "so": "-0.29",
+                                        "d": "In recupero · carry positivo 2025/26"
+                            }
+                  ],
+                  "unico": [
+                            {
+                                        "n": "100VitaRiv 2026 Special Edition",
+                                        "t": "Ramo I — Gestione Separata",
+                                        "d": "Rivalutazione garantita · capitale protetto · ideale per successione"
+                            },
+                            {
+                                        "n": "Nuovi Orizzonti — Bilanciato Prudente",
+                                        "t": "Ramo I + III Multiramo",
+                                        "d": "Nucleo garantito + obbligazionario · profilo difensivo"
+                            },
+                            {
+                                        "n": "A4L Multifund — Prudente",
+                                        "t": "Unit Linked Multifondo",
+                                        "d": "Per capitali > €25.000 · gestione separata + obbligazionario · switch gratuiti"
+                            }
+                  ]
+          },
+          "moderato": {
+                  "pac": [
+                            {
+                                        "n": "Goldman Sachs Az.",
+                                        "p": 35,
+                                        "sh": "0.23",
+                                        "so": "0.20",
+                                        "d": "Miglior Sharpe/Sortino del panel · storico GSAM · core consigliato"
+                            },
+                            {
+                                        "n": "Profilo Moderato",
+                                        "p": 35,
+                                        "sh": "0.11",
+                                        "so": "0.08",
+                                        "d": "Bilanciato flessibile · gestione attiva · orizzonte 7 anni"
+                            },
+                            {
+                                        "n": "Fidelity (SV)",
+                                        "p": 30,
+                                        "sh": "-0.20",
+                                        "so": "-0.13",
+                                        "d": "Multi-asset · ampia diversificazione geografica"
+                            }
+                  ],
+                  "unico": [
+                            {
+                                        "n": "Nuovi Orizzonti — Goldman / Profilo Moderato",
+                                        "t": "Ramo III Bilanciato",
+                                        "d": "Switch gratuiti · orizzonte 7–10 anni"
+                            },
+                            {
+                                        "n": "A4L Multifund — Bilanciato",
+                                        "t": "Unit Linked Multifondo",
+                                        "d": "Per capitali > €25.000 · switch illimitati"
+                            }
+                  ]
+          },
+          "dinamico": {
+                  "pac": [
+                            {
+                                        "n": "Goldman Sachs Az.",
+                                        "p": 50,
+                                        "sh": "0.23",
+                                        "so": "0.20",
+                                        "d": "Miglior Sharpe/Sortino del panel · storico GSAM · componente azionaria core"
+                            },
+                            {
+                                        "n": "Best Equity",
+                                        "p": 30,
+                                        "sh": "0.14",
+                                        "so": "0.09",
+                                        "d": "Azionario globale · momentum eccellente 2023/24/25"
+                            },
+                            {
+                                        "n": "Azionario Cl.E (AllianzGI)",
+                                        "p": 20,
+                                        "sh": "0.14",
+                                        "so": "0.09",
+                                        "d": "Azionario puro globale · diversificazione per stile"
+                            }
+                  ],
+                  "unico": [
+                            {
+                                        "n": "Nuovi Orizzonti — Goldman / Best Equity",
+                                        "t": "Ramo III Azionario",
+                                        "d": "Orizzonte minimo 10 anni · massima crescita"
+                            },
+                            {
+                                        "n": "A4L Multifund — Azionario",
+                                        "t": "Unit Linked",
+                                        "d": "Per capitali > €25.000"
+                            }
+                  ]
+          },
+          "aggressivo": {
+                  "pac": [
+                            {
+                                        "n": "Goldman Sachs Az.",
+                                        "p": 40,
+                                        "sh": "0.23",
+                                        "so": "0.20",
+                                        "d": "Core azionario · miglior risk-adjusted del panel · storico GSAM"
+                            },
+                            {
+                                        "n": "Best Equity",
+                                        "p": 30,
+                                        "sh": "0.14",
+                                        "so": "0.09",
+                                        "d": "Top 3 performance cumulate 2021–2025"
+                            },
+                            {
+                                        "n": "Azionario Cl.E (AllianzGI)",
+                                        "p": 20,
+                                        "sh": "0.14",
+                                        "so": "0.09",
+                                        "d": "Azionario puro · esposizione globale"
+                            },
+                            {
+                                        "n": "Pet & Animals",
+                                        "p": 10,
+                                        "sh": "0.06",
+                                        "so": "0.06",
+                                        "d": "Satellite tematico · alta volatilità · clienti consapevoli"
+                            }
+                  ],
+                  "unico": [
+                            {
+                                        "n": "Nuovi Orizzonti — 100% Azionario",
+                                        "t": "Ramo III Aggressivo",
+                                        "d": "Orizzonte minimo 13 anni · nessuna componente garantita"
+                            },
+                            {
+                                        "n": "A4L Multifund — 100% Azionario",
+                                        "t": "Unit Linked",
+                                        "d": "Per capitali > €50.000"
+                            }
+                  ]
+          }
     }
-  },
-  "fondi": {
-    "conservativo": {
-      "pac": [
-        {
-          "n": "Gestione Separata VitARIV",
-          "p": 60,
-          "sh": "—",
-          "so": "—",
-          "d": "Garanzia 0% a 10 anni · rivalutazione annua consolidata"
-        },
-        {
-          "n": "Profilo Prudente",
-          "p": 25,
-          "sh": "0.06",
-          "so": "0.03",
-          "d": "Bilanciato difensivo · bassa volatilità · orizzonte 5 anni"
-        },
-        {
-          "n": "Obblig. Strategico (PIMCO)",
-          "p": 15,
-          "sh": "-0.39",
-          "so": "-0.29",
-          "d": "In recupero · carry positivo 2025/26"
-        }
-      ],
-      "unico": [
-        {
-          "n": "100VitaRiv 2026 Special Edition",
-          "t": "Ramo I — Gestione Separata",
-          "d": "Rivalutazione garantita · capitale protetto · ideale per successione"
-        },
-        {
-          "n": "Nuovi Orizzonti — Bilanciato Prudente",
-          "t": "Ramo I + III Multiramo",
-          "d": "Nucleo garantito + obbligazionario · profilo difensivo"
-        },
-        {
-          "n": "A4L Multifund — Prudente",
-          "t": "Unit Linked Multifondo",
-          "d": "Per capitali > €25.000 · gestione separata + obbligazionario · switch gratuiti"
-        }
-      ]
-    },
-    "moderato": {
-      "pac": [
-        {
-          "n": "Goldman Sachs Az.",
-          "p": 35,
-          "sh": "0.23",
-          "so": "0.20",
-          "d": "Miglior Sharpe/Sortino del panel · storico GSAM · core consigliato"
-        },
-        {
-          "n": "Profilo Moderato",
-          "p": 35,
-          "sh": "0.11",
-          "so": "0.08",
-          "d": "Bilanciato flessibile · gestione attiva · orizzonte 7 anni"
-        },
-        {
-          "n": "Fidelity (SV)",
-          "p": 30,
-          "sh": "-0.20",
-          "so": "-0.13",
-          "d": "Multi-asset · ampia diversificazione geografica"
-        }
-      ],
-      "unico": [
-        {
-          "n": "Nuovi Orizzonti — Goldman / Profilo Moderato",
-          "t": "Ramo III Bilanciato",
-          "d": "Switch gratuiti · orizzonte 7–10 anni"
-        },
-        {
-          "n": "A4L Multifund — Bilanciato",
-          "t": "Unit Linked Multifondo",
-          "d": "Per capitali > €25.000 · switch illimitati"
-        }
-      ]
-    },
-    "dinamico": {
-      "pac": [
-        {
-          "n": "Goldman Sachs Az.",
-          "p": 50,
-          "sh": "0.23",
-          "so": "0.20",
-          "d": "Miglior Sharpe/Sortino del panel · storico GSAM · componente azionaria core"
-        },
-        {
-          "n": "Best Equity",
-          "p": 30,
-          "sh": "0.14",
-          "so": "0.09",
-          "d": "Azionario globale · momentum eccellente 2023/24/25"
-        },
-        {
-          "n": "Azionario Cl.E (AllianzGI)",
-          "p": 20,
-          "sh": "0.14",
-          "so": "0.09",
-          "d": "Azionario puro globale · diversificazione per stile"
-        }
-      ],
-      "unico": [
-        {
-          "n": "Nuovi Orizzonti — Goldman / Best Equity",
-          "t": "Ramo III Azionario",
-          "d": "Orizzonte minimo 10 anni · massima crescita"
-        },
-        {
-          "n": "A4L Multifund — Azionario",
-          "t": "Unit Linked",
-          "d": "Per capitali > €25.000"
-        }
-      ]
-    },
-    "aggressivo": {
-      "pac": [
-        {
-          "n": "Goldman Sachs Az.",
-          "p": 40,
-          "sh": "0.23",
-          "so": "0.20",
-          "d": "Core azionario · miglior risk-adjusted del panel · storico GSAM"
-        },
-        {
-          "n": "Best Equity",
-          "p": 30,
-          "sh": "0.14",
-          "so": "0.09",
-          "d": "Top 3 performance cumulate 2021–2025"
-        },
-        {
-          "n": "Azionario Cl.E (AllianzGI)",
-          "p": 20,
-          "sh": "0.14",
-          "so": "0.09",
-          "d": "Azionario puro · esposizione globale"
-        },
-        {
-          "n": "Pet & Animals",
-          "p": 10,
-          "sh": "0.06",
-          "so": "0.06",
-          "d": "Satellite tematico · alta volatilità · clienti consapevoli"
-        }
-      ],
-      "unico": [
-        {
-          "n": "Nuovi Orizzonti — 100% Azionario",
-          "t": "Ramo III Aggressivo",
-          "d": "Orizzonte minimo 13 anni · nessuna componente garantita"
-        },
-        {
-          "n": "A4L Multifund — 100% Azionario",
-          "t": "Unit Linked",
-          "d": "Per capitali > €50.000"
-        }
-      ]
-    }
-  }
 }
