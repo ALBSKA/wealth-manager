@@ -2,7 +2,7 @@
   "_meta": {
     "version": "1.0",
     "last_updated": "2026-07-07",
-    "source": "Focus Fondi Maggio 2026 (dati al 29/05/2026)",
+    "source": "Focus Fondi Maggio 2026 + Dati Bloomberg al 24/06/2026",
     "description": "Dati fondi Allianz — aggiornato automaticamente dalla skill aggiorna-fondi"
   },
   "fund_db": {
@@ -25,7 +25,7 @@
         2.36
       ],
       "cat": "Inv. Programmato",
-      "note": "Bassa duration · bassa volatilità · rendimento positivo 24 mesi · lancio mar 2019 · YTD 2026: +0,74%"
+      "note": "Bassa duration · bassa volatilità · rendimento positivo 24 mesi · lancio mar 2019 · YTD 2026: +0,50%"
     },
     "Profilo Prudente": {
       "color": "#6EE7B7",
@@ -46,7 +46,7 @@
         1.35
       ],
       "cat": "Profilo · Bilanciato Difensivo",
-      "note": "Az 24% · Obbl 67% · AR 8% · lancio mar 2019 · +3,3% dal lancio · YTD 2026: +3,28%"
+      "note": "Az 24% · Obbl 67% · AR 8% · lancio mar 2019 · +3,3% dal lancio · YTD 2026: +3,40%"
     },
     "Profilo Moderato": {
       "color": "#60A5FA",
@@ -67,7 +67,7 @@
         3.68
       ],
       "cat": "Profilo · Bilanciato Moderato",
-      "note": "Az 44% · Obbl 47% · AR 8% · lancio mar 2019 · +13,6% dal lancio · YTD 2026: +5,03%"
+      "note": "Az 44% · Obbl 47% · AR 8% · lancio mar 2019 · +13,6% dal lancio · YTD 2026: +5,30%"
     },
     "Profilo Dinamico": {
       "color": "#3B82F6",
@@ -88,7 +88,7 @@
         5.08
       ],
       "cat": "Profilo · Azionario Bilanciato",
-      "note": "Az 65% · Obbl 27% · AR 8% · lancio mar 2019 · +22,0% dal lancio · YTD 2026: +7,06%"
+      "note": "Az 65% · Obbl 27% · AR 8% · lancio mar 2019 · +22,0% dal lancio · YTD 2026: +7,20%"
     },
     "Bilanciato Prudente Cl.D": {
       "color": "#A7F3D0",
@@ -190,7 +190,7 @@
         7.33
       ],
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore AllianzGI · +38,6% dal lancio · YTD 2026: +4,97%"
+      "note": "Gestore AllianzGI · +38,6% dal lancio · YTD 2026: +4,70%"
     },
     "BlackRock (SV)": {
       "color": "#374151",
@@ -213,7 +213,7 @@
       "sharpe": -0.06,
       "sortino": -0.07,
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "★ Miglior SV · Sharpe -0.06 (top SV) · +59,8% cumulato · top 2024 (+11,3%) · YTD 2026: +7,20%"
+      "note": "★ Miglior SV · Sharpe -0.06 (top SV) · +59,8% cumulato · top 2024 (+11,3%) · YTD 2026: +6,20%"
     },
     "Fidelity (SV)": {
       "color": "#B45309",
@@ -234,7 +234,7 @@
         -0.4
       ],
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Fidelity · +6,50% dal lancio · YTD 2026: +6,10%"
+      "note": "Gestore Fidelity · +6,50% dal lancio · YTD 2026: +7,30%"
     },
     "Franklin Templeton (SV)": {
       "color": "#7C3AED",
@@ -255,7 +255,7 @@
         1.72
       ],
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Franklin Templeton · +14,6% dal lancio · YTD 2026: +6,01%"
+      "note": "Gestore Franklin Templeton · +14,6% dal lancio · YTD 2026: +6,30%"
     },
     "Morgan Stanley (SV)": {
       "color": "#0891B2",
@@ -276,7 +276,7 @@
         0.83
       ],
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Morgan Stanley · +44,1% dal lancio · YTD 2026: +3,50%"
+      "note": "Gestore Morgan Stanley · +44,1% dal lancio · YTD 2026: +5,10%"
     },
     "Pictet (SV)": {
       "color": "#059669",
@@ -297,7 +297,7 @@
         3.69
       ],
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore Pictet · +36,4% dal lancio · YTD 2026: +4,27%"
+      "note": "Gestore Pictet · +36,4% dal lancio · YTD 2026: +4,60%"
     },
     "PIMCO (SV)": {
       "color": "#DC2626",
@@ -318,7 +318,7 @@
         6.42
       ],
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore PIMCO · +28,2% dal lancio · YTD 2026: +5,11%"
+      "note": "Gestore PIMCO · +28,2% dal lancio · YTD 2026: +5,10%"
     },
     "JPMorgan (SV)": {
       "color": "#1E3A5F",
@@ -341,7 +341,7 @@
       "sharpe": -0.08,
       "sortino": -0.09,
       "cat": "Squadra Vincente · Bilanciato",
-      "note": "Gestore JPMorgan Asset Management · dati indicativi · SV Nuovi Orizzonti"
+      "note": "Gestore JPMorgan Asset Management · dati indicativi · SV Nuovi Orizzonti · YTD 2026: +5,00%"
     },
     "Obblig. Strategico (PIMCO)": {
       "color": "#FBBF24",
@@ -364,7 +364,7 @@
       "sharpe": -0.39,
       "sortino": -0.29,
       "cat": "Tema · Obbligazionario Flessibile",
-      "note": "100% obbligaz. PIMCO · carry positivo 2025/26 · lancio ott 2019 · YTD 2026: -0,05%"
+      "note": "100% obbligaz. PIMCO · carry positivo 2025/26 · lancio ott 2019 · YTD 2026: +0,90%"
     },
     "Obbligazionario (AllianzGI)": {
       "color": "#F59E0B",
@@ -385,7 +385,7 @@
         0.75
       ],
       "cat": "Tema · Obbligazionario",
-      "note": "100% obbligaz. AllianzGI · corporate EUR focus · lancio mar 2019 · YTD 2026: -0,02%"
+      "note": "100% obbligaz. AllianzGI · corporate EUR focus · lancio mar 2019 · YTD 2026: +0,10%"
     },
     "Pet & Animals": {
       "color": "#A78BFA",
@@ -408,7 +408,7 @@
       "sharpe": 0.06,
       "sortino": 0.06,
       "cat": "Tema · Azionario Tematico",
-      "note": "Tema animali domestici · alta volatilità · satellite · lancio mar 2019 · YTD 2026: -5,22%"
+      "note": "Tema animali domestici · alta volatilità · satellite · lancio mar 2019 · YTD 2026: -3,40%"
     },
     "Investimenti Sostenibili": {
       "color": "#4ADE80",
@@ -429,7 +429,7 @@
         3.71
       ],
       "cat": "Tema · ESG/SRI",
-      "note": "ESG AllianzGI · Az 41% Obbl 33% Flex 26% · lancio mar 2019 · YTD 2026: +4,71%"
+      "note": "ESG AllianzGI · Az 41% Obbl 33% Flex 26% · lancio mar 2019 · YTD 2026: +5,50%"
     },
     "Best in Class": {
       "color": "#86EFAC",
@@ -450,7 +450,7 @@
         4.39
       ],
       "cat": "Tema · Multi-Asset",
-      "note": "Multi-gestore best-in-class · Az 54% Obbl 25% Flex 21% · lancio gen 2020 · YTD 2026: +7,63%"
+      "note": "Multi-gestore best-in-class · Az 54% Obbl 25% Flex 21% · lancio gen 2020 · YTD 2026: +8,70%"
     },
     "Best Equity": {
       "color": "#10B981",
@@ -471,7 +471,7 @@
       "sharpe": 0.14,
       "sortino": 0.09,
       "cat": "Tema · Azionario",
-      "note": "Azionario AllianzGI · 96% Az · +35,9% dal lancio · YTD 2026: +13,62%"
+      "note": "Azionario AllianzGI · 96% Az · +35,9% dal lancio · YTD 2026: +14,40%"
     },
     "Automatic 40": {
       "color": "#F97316",
@@ -490,7 +490,7 @@
         2.21
       ],
       "cat": "Tema · Bilanciato Difensivo",
-      "note": "Az 34% Obbl 56% Flex 9% · AllianzGI · lancio feb 2021 · YTD 2026: +4,17%"
+      "note": "Az 34% Obbl 56% Flex 9% · AllianzGI · lancio feb 2021 · YTD 2026: +4,30%"
     },
     "Risk Control": {
       "color": "#CBD5E1",
@@ -505,7 +505,7 @@
         1.12
       ],
       "cat": "Tema · Obbligazionario Breve",
-      "note": "100% obbl. breve · bassa volatilità · lancio nov 2022 · YTD 2026: +0,01%"
+      "note": "100% obbl. breve · bassa volatilità · lancio nov 2022 · YTD 2026: +0,10%"
     },
     "AZ Rend. Italia 35 Inflation": {
       "color": "#22C55E",
@@ -522,7 +522,7 @@
         3.1
       ],
       "cat": "Tema · Obbligaz. BTP",
-      "note": "BTP ital + az globale · scad. 25/10/2035 · obiettivo inflazione · lancio nov 2022 · YTD 2026: +0,50%"
+      "note": "BTP ital + az globale · scad. 25/10/2035 · obiettivo inflazione · lancio nov 2022 · YTD 2026: +1,00%"
     },
     "AZ Rend. Italia 35 Smart Eq.": {
       "color": "#16A34A",
@@ -539,7 +539,7 @@
         4.3
       ],
       "cat": "Tema · Bilanciato BTP",
-      "note": "BTP stripped 2035 (66%) + az globale · scad. 12/04/2035 · lancio nov 2022 · YTD 2026: +1,60%"
+      "note": "BTP stripped 2035 (66%) + az globale · scad. 12/04/2035 · lancio nov 2022 · YTD 2026: +2,60%"
     }
   },
   "fondi": {
