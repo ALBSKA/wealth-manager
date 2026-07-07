@@ -3,8 +3,7 @@
     "version": "1.0",
     "last_updated": "2026-07-07",
     "source": "Focus Fondi Maggio 2026 (dati al 29/05/2026)",
-    "description": "Dati fondi Allianz — aggiornato automaticamente dalla skill aggiorna-fondi",
-    "token_test": "ok"
+    "description": "Dati fondi Allianz — aggiornato automaticamente dalla skill aggiorna-fondi"
   },
   "fund_db": {
     "PIMCO Obblig. Prudente": {
